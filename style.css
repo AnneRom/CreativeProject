@@ -12,4 +12,41 @@
 body {
     font-family: 'Nunito-Bold';
     background-color:aqua;
+    /*font-size: 10px;*/
+}
+
+/*Вдастівості для батьківського елементу
+
+column-count, column-width, columns
+
+column-width - визначає ширину стовця. Але фактична ширина 
+стовпчика може 
+бути більшою або меншою.
+Значення column-width (px, em, rem), auto, inherit (примусове успадкування)
+em = font-size в пікселях 
+
+column-count - визначає кількість колонок, яку потрібно побудувати.
+
+Коли вказуємо column-count та column-width, column-count - максимальна кількість колонок,
+column-width - мінімальна ширина колонки.
+
+columns - об'єднує дві властивості.
+*/
+
+/*column-gap - розрив між колонками. За замовчуванням column-gap = 1em. 
+column-rule - визначає стиль границь між колонками.*/
+
+.text {
+    background-color: aliceblue;
+   /*column-width: 200px;
+    column-count: 3;*/
+    columns: 3 300px;
+    column-gap: 50px;
+    column-rule: 5px dotted rebeccapurple;
+}
+
+.em {
+    background-color: darkgoldenrod;
+    width: 1em;
+    height: 1em;
 }
