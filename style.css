@@ -36,17 +36,51 @@ columns - об'єднує дві властивості.
 /*column-gap - розрив між колонками. За замовчуванням column-gap = 1em. 
 column-rule - визначає стиль границь між колонками.*/
 
+/*column-fill - визначає, як заповнювати стовпці - збалансовано чи ні.
+balance(за замовчуванням) - контент всередині колонок розподіляєься рівномірно.
+auto - стовпці заповнюються послідовно, коли контент не влазить в минулу колонку по висоті.
+!!Працює, лише якщо вказана висота.
+*/
+
+/*Властивість вкладених елементів: column-span - визначає, як повинен відображатися елемент в багатоколоковому тексті - 
+займати ширину всіх колонок або тільки одну з них*/
+
+/*break-inside - визначає, чи буде переходити контент з одного вкаленого елменту в інший.*/
+
 .text {
     background-color: aliceblue;
    /*column-width: 200px;
     column-count: 3;*/
-    columns: 3 300px;
-    column-gap: 50px;
-    column-rule: 5px dotted rebeccapurple;
+    columns: 2 300px;
+    column-gap: 10px;
+    column-rule: 5px solid rgb(128, 0, 255);
+    /*height: 500px;
+    column-fill: auto;*/
+}
+
+.text h2 {
+    background-color: rgb(128, 0, 255);
+    padding: 15px;
+    color: white;
+    column-span: all; 
+}
+
+.text #par2 {
+    /*column-span: all;*/
+}
+
+.text p {
+    break-inside: avoid;
+    margin: 0;
+}
+
+.text span {
+    color: rgb(128, 0, 255);
 }
 
 .em {
     background-color: darkgoldenrod;
-    width: 1em;
-    height: 1em;
+    width: 5em;/*1em = 16px*/
+    height: 5em;
 }
+
