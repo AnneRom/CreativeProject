@@ -11,10 +11,57 @@
 
 body {
     font-family: 'Nunito-Bold';
-    background-color:aqua;
-    /*font-size: 10px;*/
+    background-color: rgb(255, 170, 0);
+}
+header {
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
+.menu ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    width: 37.5rem;
+    list-style: none;
+}
+
+.logo img {
+    width: 80px;
+}
+
+.add-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 19.4em;
+    flex-grow: 0.5;
+    font-size: 20px;
+    
+}
+
+.search
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 11.25em;
+   
+   
+
+}
+
+.icons
+{
+    display: flex;
+    align-items: center;
+    width: 6.25em;
+    
+    
+}
 /* #region COLUMNS*/
 /*Вдастивості для батьківського елементу
 
