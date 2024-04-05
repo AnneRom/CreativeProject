@@ -9,6 +9,21 @@
          url(fonts/Nunito-Bold.woff2) format('woff2');
   }
 
+@function rem($px) {
+    $result: math.div($px, 16) + rem;
+    @return $result;
+}
+
+@function em($px, $fs) {
+    $result: math.div($px, $fs) + em;
+    @return $result;
+}
+
+@function prc($pxOne, $pxTwo) {
+    $result: math.div($pxOne, $pxTwo) * 100%;
+    @return $result;
+}
+
 body {
     font-family: 'Nunito-Bold';
     background-color: rgb(255, 170, 0);
@@ -27,7 +42,7 @@ header {
     display: flex;
     justify-content: space-between;
     margin-right: 10rem;
-    width: 60.625rem;
+    width: 63.375rem;
     flex-wrap: wrap;
 }
 
@@ -53,8 +68,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 20rem;
-    font-size: 1.57rem;
+    width: 25rem;
+    font-size: rem(25);/*1.7rem*/
 }
 
 .icons a {
@@ -73,13 +88,24 @@ header {
     border: none;
     border-radius: 20px;
     background-color: rgb(255, 170, 0);
+    font-size: 1.25rem;
+    padding-left: 3.125rem;
 
 }
 .search input[type="search"]::placeholder {
-    color: black;
+    color: gray;
     font-size: 1.25rem;
-    padding-left: 30%;
 }
+
+.search input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1em;
+    width: 1em;
+    background: url(images/close.png);
+    background-size: cover;
+    opacity: 0.7;
+}
+
 
 .search .btn-search i {
     background-color: beige;
@@ -103,7 +129,13 @@ header {
 
 }
 
-
+.icons
+{
+    display: flex;
+    width: 6.875rem;
+    justify-content: space-between;
+    align-items: center;    
+}
 
 
 
@@ -126,15 +158,6 @@ header {
     border-radius: 30px;
 }
 */
-
-.icons
-{
-    display: flex;
-    width: 6.25rem;
-    justify-content: space-between;
-    align-items: center;    
-}
-
 
 /* #region COLUMNS*/
 /*Вдастивості для батьківського елементу
