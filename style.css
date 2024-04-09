@@ -9,7 +9,8 @@
          url(fonts/Nunito-Bold.woff2) format('woff2');
   }
 
-@function rem($px) {
+/* #region function->rem, em, prc */
+/*@function rem($px) {
     $result: math.div($px, 16) + rem;
     @return $result;
 }
@@ -22,7 +23,8 @@
 @function prc($pxOne, $pxTwo) {
     $result: math.div($pxOne, $pxTwo) * 100%;
     @return $result;
-}
+}*/
+/* #endregion */
 
 body {
     font-family: 'Nunito-Bold';
@@ -48,12 +50,25 @@ header {
 
 .menu ul {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     text-align: center;
     width: 37.5rem;
     list-style: none;
     padding: 0;
+    margin: 0;
+    height: calc(65/16*1rem);
+}
+
+.menu ul li {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: calc(65/16*1rem);
+}
+
+.menu ul li:hover {
+    border-bottom: 5px solid black;
 }
 
 .logo {
@@ -69,7 +84,7 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 25rem;
-    font-size: rem(25);/*1.7rem*/
+    font-size: calc(28 / 16 * 1rem)/*1.75rem*/
 }
 
 .icons a {
@@ -88,7 +103,7 @@ header {
     border: none;
     border-radius: 20px;
     background-color: rgb(255, 170, 0);
-    font-size: 1.25rem;
+    font-size: calc(20/16*1rem);/*20px*/
     padding-left: 3.125rem;
 
 }
@@ -99,8 +114,8 @@ header {
 
 .search input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none;
-    height: 1em;
-    width: 1em;
+    height: calc(20/20*1em);/*20px: 20 - розмір хрестика за макетом, 20 - розмір шрифту батьківського елементу*/
+    width: calc(20/20*1em);
     background: url(images/close.png);
     background-size: cover;
     opacity: 0.7;
