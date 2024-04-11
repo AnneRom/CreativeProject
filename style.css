@@ -26,12 +26,20 @@
 }*/
 /* #endregion */
 
+:root {
+    --lightorange: rgb(255, 170, 0);
+    --green:rgb(57, 147, 57);
+    --darkorange:rgb(171, 114, 1);
+    --darkgreen:rgb(0, 72, 0);
+
+}
+
 body {
     font-family: 'Nunito-Bold';
-    background-color: rgb(255, 170, 0);
+    background-color: var(--lightorange);
 }
 header {
-    background-color: green;
+    background-color: var(--green);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -64,11 +72,17 @@ header {
     display: flex;
     align-items: center;
     margin: 0;
-    height: calc(65/16*1rem);
+    height: calc(40/16*1rem);
+    border-bottom: 3px solid var(--green);
 }
 
 .menu ul li:hover {
-    border-bottom: 5px solid black;
+    border-bottom: 3px solid black;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: black;
 }
 
 .logo {
@@ -136,11 +150,11 @@ header {
 }
 
 .icons i:hover {
-    background-color: rgb(0, 72, 0);
+    background-color: var(--darkgreen);
 
 }
 .btn-search i:hover {
-    background-color: rgb(171, 114, 1);
+    background-color: var(--darkorange);
 
 }
 
