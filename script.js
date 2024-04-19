@@ -6,22 +6,32 @@ let item = document.querySelector(".menu ul li");
 console.log(item);
 
 item.addEventListener('mouseover', function() {
+
     let catalogDiv = document.querySelector('.catalog');
     catalogDiv.style.display = 'flex';
-    console.log(catalogDiv);
 
-    catalogDiv.classList.add('catalog-anim');
+    catalogDiv.classList.add('catalog-anim-in');
     console.log(catalogDiv);
 
     catalogDiv.addEventListener('animationend', function() {
-        catalogDiv.classList.remove('catalog-anim');
+        catalogDiv.classList.remove('catalog-anim-in');
         console.log(catalogDiv);
     });
+
 });
+
 
 item.addEventListener('mouseout', function() {
     let catalogDiv = document.querySelector('.catalog');
-    catalogDiv.style.display = 'none';
+    catalogDiv.style.display = 'none'; 
+
+    /*catalogDiv.classList.add('catalog-anim-out');
     console.log(catalogDiv);
+
+    catalogDiv.addEventListener('animationend', function() {
+        catalogDiv.classList.remove('catalog-anim-out');
+        console.log(catalogDiv);
+    });*/
+    
 });
 
