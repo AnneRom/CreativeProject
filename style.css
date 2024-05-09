@@ -73,6 +73,8 @@ header {
 .menu ul li {
     display: flex;
     align-items: center;
+    /*flex-grow: 1;*/
+    text-align: center;
     margin: 0;
     height: calc(40/16*1rem);
     border-bottom: 3px solid var(--green);
