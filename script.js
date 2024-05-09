@@ -45,7 +45,7 @@ items.forEach((itemList, index) => {
 
     itemList.addEventListener('mouseout', function() {
 
-        if(isCatalogVisible && !animationInProgress) {// -> isCatalogVisible == true
+        if (!item.matches(':hover') && isCatalogVisible && !animationInProgress) {// -> isCatalogVisible == true
     
         catalogDiv.classList.add('catalog-anim-out');
         animationInProgress = true;
