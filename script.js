@@ -1,78 +1,99 @@
-let items = document.querySelectorAll('.menu ul li');//[New Men Women Kids Acss Sale]
+let items = document.querySelectorAll('.menu ul li');
+console.log(items);
 
 let item = document.querySelector(".menu ul li");
-let isCatalogVisible = false;//Чи каталог видимий?
+console.log(item);
+let isCatalogVisible = false;//Чи каталог видимий
 let animationInProgress = false;//Чи вже триває анімація?
 let currentCatalogDiv = null;//буде визначати поточний каталог (той, на який курсор миші)
-
+let previousCatalogDiv = null;//зберігає попередній каталог (той, на який було наведено курсор миші)
+let hideCatalogTimer = null;//змінна для зберігання таймеру перед викликом функції hideCatalog()
 // ! - НЕ
 // || - AБО
 // && - І
 
 items.forEach((itemList, index) => {
-
     let catalogDiv = document.getElementById(`catalog-${index+1}`);
-    let relatedItem = itemList.relatedTarget;
+    let relatedItem = itemList.relatedTarget
     let targetItem = itemList.target;
-    
 
-    itemList.addEventListener('mouseover', function () {
+    itemList.addEventListener('mouseenter', function () {
 
-        console.log(relatedItem);
-        console.log(targetItem);
+        clearTimeout(hideCatalogTimer);
 
         if (!isCatalogVisible && !animationInProgress) {// -> isCatalogVisible == false
-            showCatalog (catalogDiv);
+            hideCatalog(previousCatalogDiv);
+            showCatalog(catalogDiv);
+            previousCatalogDiv = catalogDiv;
         }
         else if (currentCatalogDiv !== catalogDiv) {
-           /* hideCatalog (catalogDiv);*/
+            //hideCatalog(catalogDiv)
         }
     });
 
-    itemList.addEventListener('mouseout', function() {
+    itemList.addEventListener('mouseleave', function () {
 
-    if(!itemList.matches(':hover') && isCatalogVisible && !animationInProgress) {// -> isCatalogVisible == true
-        hideCatalog(currentCatalogDiv);
-    }
-    
+            hideCatalogTimer = setTimeout(() => {
+                hideCatalog(currentCatalogDiv);
+            }, 500);
+
+    });
 });
-});
 
 
-function hideAndShowCatalog (catalogDiv) { //catalogDiv - це параметр функції(поки щось невідоме)
-    if (currentCatalogDiv !==null) {
-        hideCatalog (currentCatalogDiv);//при виклику функції currentCatalogDiv - це аргумент функції(конкретне значення)
-    }
-    showCatalog (catalogDiv);
-}
+//isCatalogVisible = true;
 
-function showCatalog (catalogDiv) {
-    catalogDiv.style.display = 'flex';
-    isCatalogVisible = true;
-    
-    catalogDiv.classList.add('catalog-anim-in');
-    animationInProgress = true;
+function showCatalog(catalogDiv) {
+    console.log("showCatalog");
+     catalogDiv.style.display = 'flex';
+            isCatalogVisible = true;//Чи елемент каталог видимий?
+            console.log(catalogDiv);
 
-    catalogDiv.addEventListener('animationend', function doingAnimationEnd() {
-        catalogDiv.classList.remove('catalog-anim-in');
-        animationInProgress = false;
-        
-        catalogDiv.removeEventListener('animationend', doingAnimationEnd);
-    }); 
-    
+            animationInProgress = false;
+            /*
+            catalogDiv.classList.add('catalog-anim-in');
+            animationInProgress = true;
+            console.log(catalogDiv);
+
+            catalogDiv.addEventListener('animationend', function doingAnimationEnd() {
+                catalogDiv.classList.remove('catalog-anim-in');
+                animationInProgress = false;
+                console.log(catalogDiv);
+
+
+                catalogDiv.removeEventListener('animationend', doingAnimationEnd);
+            });*/
     currentCatalogDiv = catalogDiv;
 }
 
-function hideCatalog (catalogDiv) {
-    catalogDiv.classList.add('catalog-anim-out');
+function hideAndshowCatalog(catalogDiv) {//catalogDiv - це параметр функції(поки щось невідоме)
+//при виклику функції currentCatalogDiv - це аргумент функції(конкретне значення)
+    if (currentCatalogDiv !== null) {
+        hideCatalog(currentCatalogDiv);
+    }
+    showCatalog(catalogDiv);
+}
+
+function hideCatalog(catalogDiv) {
+    if (isCatalogVisible && !animationInProgress) {// -> isCatalogVisible == true
+
+    console.log("hideCatalog");
+    catalogDiv.style.display = 'none';
+    isCatalogVisible = false;
+    animationInProgress = false;
+    
+    }
+   /* catalogDiv.classList.add('catalog-anim-out');
     animationInProgress = true;
+    console.log(catalogDiv);
 
     catalogDiv.addEventListener('animationend', function doingAnimationEnd() {
         catalogDiv.classList.remove('catalog-anim-out');
         catalogDiv.style.display = 'none';
         isCatalogVisible = false;
         animationInProgress = false;
+        console.log(catalogDiv);
 
         catalogDiv.removeEventListener('animationend', doingAnimationEnd);
-    });
+    });*/
 }
