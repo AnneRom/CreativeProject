@@ -1,99 +1,90 @@
 let items = document.querySelectorAll('.menu ul li');
 console.log(items);
 
-let item = document.querySelector(".menu ul li");
-console.log(item);
 let isCatalogVisible = false;//Чи каталог видимий
 let animationInProgress = false;//Чи вже триває анімація?
 let currentCatalogDiv = null;//буде визначати поточний каталог (той, на який курсор миші)
-let previousCatalogDiv = null;//зберігає попередній каталог (той, на який було наведено курсор миші)
-let hideCatalogTimer = null;//змінна для зберігання таймеру перед викликом функції hideCatalog()
-// ! - НЕ
-// || - AБО
-// && - І
+let showCatalogTimer = null; // змінна для зберігання таймеру перед викликом функції showCatalog()
+
+let menuContainer = document.querySelector('.menu ul');
+
+menuContainer.addEventListener('mouseleave', function () {
+    hideCatalog(currentCatalogDiv, true);
+});
 
 items.forEach((itemList, index) => {
     let catalogDiv = document.getElementById(`catalog-${index+1}`);
-    let relatedItem = itemList.relatedTarget
-    let targetItem = itemList.target;
-
+    
     itemList.addEventListener('mouseenter', function () {
+        clearTimeout(showCatalogTimer);
+        
+        if (!isCatalogVisible && !animationInProgress) { // вказує на те, що жоден каталог не відкритий.
+            console.log("eeee");
 
-        clearTimeout(hideCatalogTimer);
+            showCatalogTimer = setTimeout(() => {
+                showCatalog(catalogDiv, true);
+            }, 200); // Затримка перед показом каталогу
 
-        if (!isCatalogVisible && !animationInProgress) {// -> isCatalogVisible == false
-            hideCatalog(previousCatalogDiv);
-            showCatalog(catalogDiv);
-            previousCatalogDiv = catalogDiv;
-        }
-        else if (currentCatalogDiv !== catalogDiv) {
-            //hideCatalog(catalogDiv)
-        }
+        } else if (currentCatalogDiv !== catalogDiv) {
+            showCatalogTimer = setTimeout(() => {
+                hideAndshowCatalog(catalogDiv);
+            }, 200); // Затримка перед показом каталогу
+          
+        }   
     });
 
     itemList.addEventListener('mouseleave', function () {
-
-            hideCatalogTimer = setTimeout(() => {
-                hideCatalog(currentCatalogDiv);
-            }, 500);
-
+        clearTimeout(showCatalogTimer);
     });
 });
 
+function showCatalog(catalogDiv, withAnimation) {
+    if (withAnimation) {
+        catalogDiv.style.display = 'flex';
+        catalogDiv.classList.add('catalog-anim-in');
+        isCatalogVisible = true;
+        animationInProgress = true;
 
-//isCatalogVisible = true;
-
-function showCatalog(catalogDiv) {
-    console.log("showCatalog");
-     catalogDiv.style.display = 'flex';
-            isCatalogVisible = true;//Чи елемент каталог видимий?
-            console.log(catalogDiv);
-
+        catalogDiv.addEventListener('animationend', function doingAnimationEnd() {
+            catalogDiv.classList.remove('catalog-anim-in');
             animationInProgress = false;
-            /*
-            catalogDiv.classList.add('catalog-anim-in');
-            animationInProgress = true;
-            console.log(catalogDiv);
 
-            catalogDiv.addEventListener('animationend', function doingAnimationEnd() {
-                catalogDiv.classList.remove('catalog-anim-in');
-                animationInProgress = false;
-                console.log(catalogDiv);
-
-
-                catalogDiv.removeEventListener('animationend', doingAnimationEnd);
-            });*/
+            catalogDiv.removeEventListener('animationend', doingAnimationEnd);
+        }); 
+    } else {
+        catalogDiv.style.display = 'flex';
+        isCatalogVisible = true;
+        animationInProgress = false;
+    }
     currentCatalogDiv = catalogDiv;
 }
 
-function hideAndshowCatalog(catalogDiv) {//catalogDiv - це параметр функції(поки щось невідоме)
-//при виклику функції currentCatalogDiv - це аргумент функції(конкретне значення)
+function hideAndshowCatalog(catalogDiv) {
+    console.log("aaaaaaa")
     if (currentCatalogDiv !== null) {
-        hideCatalog(currentCatalogDiv);
+        hideCatalog(currentCatalogDiv, false);
     }
-    showCatalog(catalogDiv);
+    showCatalog(catalogDiv, false);
 }
 
-function hideCatalog(catalogDiv) {
-    if (isCatalogVisible && !animationInProgress) {// -> isCatalogVisible == true
-
-    console.log("hideCatalog");
-    catalogDiv.style.display = 'none';
-    isCatalogVisible = false;
-    animationInProgress = false;
+function hideCatalog(catalogDiv, withAnimation) {
+    if (catalogDiv && isCatalogVisible && !animationInProgress) {
+    if (withAnimation) {
+        catalogDiv.classList.add('catalog-anim-out');
+        animationInProgress = true;
+   
+        catalogDiv.addEventListener('animationend', function doingAnimationEnd() {
+            catalogDiv.classList.remove('catalog-anim-out');
+            catalogDiv.style.display = 'none';
+            isCatalogVisible = false;
+            animationInProgress = false;
     
-    }
-   /* catalogDiv.classList.add('catalog-anim-out');
-    animationInProgress = true;
-    console.log(catalogDiv);
-
-    catalogDiv.addEventListener('animationend', function doingAnimationEnd() {
-        catalogDiv.classList.remove('catalog-anim-out');
+            catalogDiv.removeEventListener('animationend', doingAnimationEnd);
+        });
+    } else {
         catalogDiv.style.display = 'none';
         isCatalogVisible = false;
         animationInProgress = false;
-        console.log(catalogDiv);
-
-        catalogDiv.removeEventListener('animationend', doingAnimationEnd);
-    });*/
+    }
+}   
 }
