@@ -1,17 +1,30 @@
 let items = document.querySelectorAll('.menu ul li');
 console.log(items);
 
+let menuUl = document.querySelector('.menu ul');
+console.log(menuUl);
+
 let item = document.querySelector(".menu ul li");
 console.log(item);
 let isCatalogVisible = false;//Чи каталог видимий
 let animationInProgress = false;//Чи вже триває анімація?
 
 let previousCatalogDiv = null;//відповідає за зберігання попередгього каталогу(той, на який було наведено курсор миші до цього)
-let hideCatalogTimer = null;//змінна для зберігання таймеру перед викликом функції hideCatalog()
+let showCatalogTimer = null;//змінна для зберігання таймеру перед викликом функції showCatalog()
 // ! - НЕ
 // || - AБО
 // && - І
 //комбінація клавіш щоб закоментувати/розкоментувати виділений код -> ctrl + /
+
+// let menuContainer = document.querySelector('.menu ul');
+
+// menuContainer.addEventListener('mouseleave', function () {
+//     hideCatalog(previousCatalogDiv, true);
+// });
+
+menuUl.addEventListener('mouseleave', function() {
+    hideCatalog(previousCatalogDiv, true);
+});
 
 items.forEach((itemList, index) => {
     let catalogDiv = document.getElementById(`catalog-${index+1}`);
@@ -21,18 +34,22 @@ items.forEach((itemList, index) => {
 
     itemList.addEventListener('mouseenter', function () {
 
-        //clearTimeout(hideCatalogTimer);
+        clearTimeout(showCatalogTimer);
 
         if (!isCatalogVisible && !animationInProgress) {// -> isCatalogVisible == false
-            showCatalog(catalogDiv, true);
+            showCatalogTimer = setTimeout (() => {
+                showCatalog(catalogDiv, true);
+            }, 200);
         }
         else if (previousCatalogDiv !== catalogDiv) {
-            hideAndshowCatalog(catalogDiv);
+            showCatalogTimer = setTimeout (() => {
+                hideAndshowCatalog(catalogDiv);
+            }, 200);
         }
     });
 
     itemList.addEventListener('mouseleave', function () {
-
+        clearTimeout(showCatalogTimer);
     });
 });
 

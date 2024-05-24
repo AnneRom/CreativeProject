@@ -170,6 +170,10 @@ header {
     align-items: center;    
 }
 
+.menu-icon {
+    display: none;
+}
+
 .catalog {
     background-color: var(--green);
     /* display: flex;*/
@@ -221,7 +225,24 @@ header {
     animation-duration: 600ms;
 }
 
-
+@media screen and (max-width: 1800px){
+    .menu, .search form{
+        display: none;
+    }
+    
+    .menu-icon {
+        display: block;
+    }
+    .add-menu {
+        width: calc(265/16*1rem);
+    }
+    .search .btn-search i {
+        transform: translateX(0%);
+    }
+    .icons{
+        width: calc(165/16*1rem);
+    }
+}
 
 @keyframes slide {
     0%
