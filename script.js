@@ -113,3 +113,15 @@ function hideCatalog(catalogDiv, withAnimation) {
         }    
     }
 }
+
+let menuIcon = document.querySelector('.menu-icon');
+let sideBar = document.querySelector('.sidebar-menu');
+console.log(menuIcon);
+console.log(sideBar);
+
+menuIcon.addEventListener('click', function(){
+    sideBar.classList.add('active');
+});
+
+//Створили sideBar, застилізували його і контент всередині нього. В JS створили змінні menuIcon, 
+//sideBar. Додали обробник подій, який при натисканні на іконку menuIcon додає до sideBar клас з анімацією.
