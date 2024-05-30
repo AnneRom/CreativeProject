@@ -116,12 +116,29 @@ function hideCatalog(catalogDiv, withAnimation) {
 
 let menuIcon = document.querySelector('.menu-icon');
 let sideBar = document.querySelector('.sidebar-menu');
+let closeBtn = document.querySelector('.close-btn i');
+let contentElements = document.querySelectorAll('.content');
+let body = document.body;
 console.log(menuIcon);
 console.log(sideBar);
+console.log(closeBtn);
+console.log(contentElements);
 
 menuIcon.addEventListener('click', function(){
     sideBar.classList.add('active');
+    body.style.overflow = 'hidden';//зупинка прокрутки
+    contentElements.forEach(content => {
+        content.classList.add('blur');
+    });
+   
 });
 
-//Створили sideBar, застилізували його і контент всередині нього. В JS створили змінні menuIcon, 
-//sideBar. Додали обробник подій, який при натисканні на іконку menuIcon додає до sideBar клас з анімацією.
+closeBtn.addEventListener('click', function(){
+    sideBar.classList.remove('active');
+    body.style.overflow = 'visible';//за замовчуванням прорутка є
+    contentElements.forEach(content => {
+        content.classList.remove('blur');
+    });
+   
+});
+

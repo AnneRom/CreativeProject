@@ -182,7 +182,9 @@ header {
     height: 100%;
     background-color: #fff;
     z-index: 999;
+    filter: blur(0px);
     transition: right 0.3s ease;
+    font-family: 'Nunito-Bold';
 }
 .sidebar-menu ul {
     list-style: none;
@@ -192,6 +194,10 @@ header {
 }
 .sidebar-menu li {
     padding: 20px;
+    border-bottom: 4px solid white;
+}
+.sidebar-menu li:hover {
+    border-bottom: 4px solid var(--darkgreen);
 }
 .sidebar-menu a {
     text-decoration: none;
@@ -205,14 +211,30 @@ header {
     padding-top: 20px;
 }
 .close-btn i {
-    background-color: beige;
-    padding: calc(16/16*1rem);;
+    background-color: var(--darkorange);
+    color: black;
+    padding: calc(16/16*1rem) calc(20/16*1rem);
     border-radius: 50%;
     cursor: pointer;
 }
 .sidebar-menu.active {
     right: 0;
 }
+.content {
+    filter: blur(0px);
+    transition: filter 0.3s ease;
+}
+.blur {
+    filter: blur(5px);
+}
+
+
+
+.no-scroll {
+    overflow: hidden;
+}
+
+
 
 .catalog {
     background-color: var(--green);
@@ -274,6 +296,9 @@ header {
     }
     .main-menu, .add-menu {
         width: calc(265/16*1rem);
+    }
+    .main-menu {
+        margin-right: calc(100/16*1rem);
     }
     .search .btn-search i {
         transform: translateX(0%);
