@@ -31,6 +31,8 @@
     --green:rgb(57, 147, 57);
     --darkorange:rgb(171, 114, 1);
     --darkgreen:rgb(0, 72, 0);
+    --grayNike: #F6F6F6;
+    --darkGrayNike: #CACACB;
 
 }
 
@@ -324,6 +326,7 @@ header {
    height: 600px; 
    position: relative;
    overflow: hidden;
+   background-color: var(--green);
 }
 .gallery-item img {
     height: 100%;
@@ -340,17 +343,20 @@ header {
     text-align: center;
     font-size: 30px;
 }
+.prev i, .next i{
+    padding: calc((80 - 30)/2*1px) calc((80 - 18.75)/2*1px);
+}
 .prev, .next{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color:rgb(11, 87, 229);
-    padding: 20px 30px;
+    background-color: var(--darkGrayNike);
     border-radius: 50%;
     cursor: pointer;
     font-size: 30px;
     z-index: 10;
 }
+
 .prev {
     left: 100px;
 }
