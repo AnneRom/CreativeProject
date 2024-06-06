@@ -142,3 +142,27 @@ closeBtn.addEventListener('click', function(){
    
 });
 
+const galleryContainer = document.querySelector('.gallery-container');
+const galleryItems = document.querySelectorAll('.gallery-item');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+let currentIndex = 0;
+
+console.log(galleryItems);
+
+function updateGallery() {
+    let itemWidth = galleryItems[0].clientWidth + 30;//600+30=630px
+    const offset = -currentIndex * itemWidth;//-(-1)*630
+    console.log(offset);
+    galleryContainer.style.transform = `translateX(${offset}px)`;
+    //якщо translateX(+) - то рух =>
+    //якщо translateX(-) - то рух <=
+}
+
+function showNext(){
+    currentIndex = currentIndex + 1;
+    updateGallery();
+}
+
+nextButton.addEventListener('click', showNext);
+updateGallery();
