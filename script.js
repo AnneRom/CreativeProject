@@ -146,13 +146,51 @@ const galleryContainer = document.querySelector('.gallery-container');
 const galleryItems = document.querySelectorAll('.gallery-item');
 const prevButton = document.querySelector('.prev');
 const nextButton = document.querySelector('.next');
-let currentIndex = 0;
+let currentIndex = 0;//поточний індекс елемента
 
 console.log(galleryItems);
 
+const itemsGallery = [
+    {src: 'images/galleryMainPage/air-max-1-sc.webp', alt: 'air-max-1', title: 'AIR MAX'},
+    {src: 'images/galleryMainPage/air-jordan-1-retro-high-og.webp', alt: 'air-jordan-1', title: 'AIR JORDAN 1'},
+    {src: 'images/galleryMainPage/dunk-low-retro.webp', alt: 'dunk', title: 'DUNK'},
+    {src: 'images/galleryMainPage/air-force-1.webp', alt: 'air-force-1', title: 'AIR FORCE 1'},
+    {src: 'images/galleryMainPage/blazer-mid-77-vintage.webp', alt: 'blazer', title: 'BLAZER'},
+    {src: 'images/galleryMainPage/zoom-vomero-5.webp', alt: 'vomero', title: 'VOMERO'}
+]
+
+//функція для створення одного елемента галереї
+function createGalleryItem(item) {
+    const galleryItem = document.createElement('div');//<div></div>
+    galleryItem.classList.add('gallery-item');//<div class = 'gallery-item'></div>
+    
+    const img = document.createElement('img');//<img src="" alt="">
+    img.src = item.src;//<img src="images/galleryMainPage/..." alt="">
+    img.alt = item.alt;//<img src="images/galleryMainPage/..." alt="AIR MAX/...">
+    
+    const title = document.createElement('h3');//<h3></h3>
+    title.textContent = item.title//<h3>AIR MAX/...</h3>
+
+    galleryItem.appendChild(img);
+    galleryItem.appendChild(title);
+    //<div class = 'gallery-item'>
+        //<img src="images/galleryMainPage/..." alt="AIR MAX/...">
+        //<h3>AIR MAX/...</h3>
+    //</div>
+    return galleryItem;
+}
+
+//console.log(createGalleryItem(itemsGallery[0]));
+
+//функція для створення елементів галереї (дублювання цілої галереї)
+function createGalleryItems() {
+    const fragment = document.createDocumentFragment();//створюється фрагмент коду
+
+}
+
 function updateGallery() {
     let itemWidth = galleryItems[0].clientWidth + 30;//600+30=630px
-    const offset = -currentIndex * itemWidth;//-(-1)*630
+    let offset = -currentIndex * itemWidth;//-(-1)*630
     console.log(offset);
     galleryContainer.style.transform = `translateX(${offset}px)`;
     //якщо translateX(+) - то рух =>
@@ -164,5 +202,11 @@ function showNext(){
     updateGallery();
 }
 
+function showPrev(){
+    currentIndex = currentIndex - 1;
+    updateGallery();
+}
+
 nextButton.addEventListener('click', showNext);
+prevButton.addEventListener('click', showPrev);
 updateGallery();
