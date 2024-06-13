@@ -199,7 +199,7 @@ createGalleryItems();//функція дублювання
 const galleryItems = document.querySelectorAll('.gallery-item');
 const prevButton = document.querySelector('.prev');
 const nextButton = document.querySelector('.next');
-let currentIndex = items.length;//поточний індекс елемента
+let currentIndex = items.length;//поточний індекс елемента 6
 
 function updateGallery() {
     let itemWidth = galleryItems[0].clientWidth + 30;//600+30=630px
@@ -213,9 +213,14 @@ console.log(galleryItems.length);
 function showNext(){
     // currentIndex = currentIndex + 1;
     currentIndex++;
+    console.log(currentIndex);
     updateGallery();
-    if (currentIndex === galleryItems.length - items.length) {
-        currentIndex = items.length;
+    galleryContainer.style.transition = 'transform 1 ease';  
+    if (currentIndex === galleryItems.length - items.length) {//currentIndex = 18-6 =12
+        // console.log(currentIndex);//12
+        // console.log(galleryItems.length);//18
+        // console.log(items.length);//6
+        currentIndex = items.length;//6
         updateGallery();
     }
 
@@ -231,7 +236,12 @@ function showNext(){
 function showPrev(){
     // currentIndex = currentIndex - 1;
     currentIndex--;
+    console.log(currentIndex);
     updateGallery();
+    if (currentIndex === items.length - 1) {//currentIndex = 5
+        currentIndex = items.length * 2 - 1;//11
+        updateGallery();
+    }
 }
 
 nextButton.addEventListener('click', showNext);

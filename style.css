@@ -321,13 +321,15 @@ header {
     display: flex;
     gap: 30px;
     width: max-content;
+    /* transform: translateX(0);
+    transition: transform 1 ease; */
+    /* overflow-x: scroll; */
 }
 .gallery-item {
    width: 350px;
    height: 350px; 
    position: relative;
    overflow: hidden;
-   background-color: red;
 }
 .gallery-item img {
     height: 100%;
