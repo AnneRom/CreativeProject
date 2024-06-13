@@ -103,7 +103,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 25rem;
+    /* width: 25rem; */
+    width: 19.375rem;
     font-size: calc(28 / 16 * 1rem)/*1.75rem*/
 }
 
@@ -119,7 +120,7 @@ header {
 
 .search input[type="search"] {
     width: 11.25rem;
-    height: 2.75rem;
+    height: calc(48/16*1rem);
     border: none;
     border-radius: 20px;
     background-color: white;
@@ -167,7 +168,7 @@ header {
 .icons
 {
     display: flex;
-    width: 6.875rem;
+    width: 6.25em;
     justify-content: space-between;
     align-items: center;    
 }
@@ -179,8 +180,8 @@ header {
 .sidebar-menu {
     position: fixed;
     top: 0;
-    right: -500px;
-    width: 500px;
+    right: -400px;
+    width: 400px;
     height: 100%;
     background-color: #fff;
     z-index: 999;
@@ -204,11 +205,11 @@ header {
 .sidebar-menu a {
     text-decoration: none;
     color: black;
-    font-size: calc(44/16*1rem);
+    font-size: calc(34/16*1rem);
 }
 .close-btn {
     text-align: right;
-    font-size: calc(48/16*1rem);
+    font-size: calc(38/16*1rem);
     padding-right: 50px;
     padding-top: 20px;
 }
@@ -289,7 +290,7 @@ header {
     animation-duration: 600ms;
 }
 
-@media screen and (max-width: 1800px){
+@media screen and (max-width: 1200px){
     .menu, .search form{
         display: none;
     }
@@ -322,8 +323,8 @@ header {
     width: max-content;
 }
 .gallery-item {
-   width: 600px;
-   height: 600px; 
+   width: 350px;
+   height: 350px; 
    position: relative;
    overflow: hidden;
    background-color: red;
@@ -335,16 +336,16 @@ header {
 }
 .gallery-item h3 {
     position: absolute;
-    bottom: 40px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     margin: 0;
     padding: 5px 10px;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
 }
 .prev i, .next i{
-    padding: calc((80 - 30)/2*1px) calc((80 - 18.75)/2*1px);
+    padding: calc((30 - 20)/2*1px) calc((30 - 12.5)/2*1px);
 }
 .prev, .next{
     position: absolute;
@@ -353,7 +354,7 @@ header {
     background-color: var(--darkGrayNike);
     border-radius: 50%;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 20px;
     z-index: 10;
 }
 .prev {

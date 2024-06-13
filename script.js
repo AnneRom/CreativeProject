@@ -143,13 +143,6 @@ closeBtn.addEventListener('click', function(){
 });
 
 const galleryContainer = document.querySelector('.gallery-container');
-const galleryItems = document.querySelectorAll('.gallery-item');
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
-let currentIndex = 0;//поточний індекс елемента
-
-console.log(galleryItems);
-
 const itemsGallery = [
     {src: 'images/galleryMainPage/air-max-1-sc.webp', alt: 'air-max-1', title: 'AIR MAX'},
     {src: 'images/galleryMainPage/air-jordan-1-retro-high-og.webp', alt: 'air-jordan-1', title: 'AIR JORDAN 1'},
@@ -180,13 +173,33 @@ function createGalleryItem(item) {
     return galleryItem;
 }
 
-//console.log(createGalleryItem(itemsGallery[0]));
+// console.log(createGalleryItem(itemsGallery[0]));
 
 //функція для створення елементів галереї (дублювання цілої галереї)
 function createGalleryItems() {
     const fragment = document.createDocumentFragment();//створюється фрагмент коду
+    itemsGallery.forEach(item => {
+        const galleryItem = createGalleryItem(item);
+        // console.log(galleryItem);
+        // console.log(fragment);
+        fragment.appendChild(galleryItem);    
+    });
+    // console.log(fragment);
+    itemsGallery.forEach(item => {
+        const galleryItem = createGalleryItem(item);
+        fragment.appendChild(galleryItem);    
+    });
 
+    galleryContainer.appendChild(fragment);
+    console.log(galleryContainer);
 }
+
+createGalleryItems();//функція дублювання
+
+const galleryItems = document.querySelectorAll('.gallery-item');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+let currentIndex = items.length;//поточний індекс елемента
 
 function updateGallery() {
     let itemWidth = galleryItems[0].clientWidth + 30;//600+30=630px
@@ -196,14 +209,28 @@ function updateGallery() {
     //якщо translateX(+) - то рух =>
     //якщо translateX(-) - то рух <=
 }
-
+console.log(galleryItems.length);
 function showNext(){
-    currentIndex = currentIndex + 1;
+    // currentIndex = currentIndex + 1;
+    currentIndex++;
     updateGallery();
+    if (currentIndex === galleryItems.length - items.length) {
+        currentIndex = items.length;
+        updateGallery();
+    }
+
 }
 
+// a = 10 
+// '10' == 10 - true
+// '10' === 10 - false
+//  10 === 10 - true
+// false == 0 - true
+// false === 0 - false
+
 function showPrev(){
-    currentIndex = currentIndex - 1;
+    // currentIndex = currentIndex - 1;
+    currentIndex--;
     updateGallery();
 }
 
