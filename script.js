@@ -195,11 +195,14 @@ function createGalleryItems() {
 }
 
 createGalleryItems();//функція дублювання
+//1 оригінальна + 2 дубльовані галереї
+
 
 const galleryItems = document.querySelectorAll('.gallery-item');
 const prevButton = document.querySelector('.prev');
 const nextButton = document.querySelector('.next');
 let currentIndex = items.length;//поточний індекс елемента 6
+
 
 function updateGallery() {
     let itemWidth = galleryItems[0].clientWidth + 30;//600+30=630px
@@ -210,20 +213,23 @@ function updateGallery() {
     //якщо translateX(-) - то рух <=
 }
 console.log(galleryItems.length);
+
 function showNext(){
     // currentIndex = currentIndex + 1;
     currentIndex++;
     console.log(currentIndex);
     updateGallery();
-    galleryContainer.style.transition = 'transform 1 ease';  
     if (currentIndex === galleryItems.length - items.length) {//currentIndex = 18-6 =12
         // console.log(currentIndex);//12
         // console.log(galleryItems.length);//18
         // console.log(items.length);//6
-        currentIndex = items.length;//6
-        updateGallery();
+        setTimeout(() => {
+            galleryContainer.style.transition = 'none';
+            currentIndex = items.length;//6
+            updateGallery();
+            setTimeout(() => galleryContainer.style.transition = 'transform 1s ease', 0);
+        }, 1000);
     }
-
 }
 
 // a = 10 
@@ -233,17 +239,43 @@ function showNext(){
 // false == 0 - true
 // false === 0 - false
 
-function showPrev(){
-    // currentIndex = currentIndex - 1;
+// function showPrev(){
+//     // currentIndex = currentIndex - 1;
+//     currentIndex--;
+//     console.log(currentIndex);
+//     updateGallery();
+//     //!!!!
+//     galleryContainer.style.transition = 'transform 0.5s ease'
+//     if (currentIndex === items.length - 1) {//currentIndex = 5
+//         setTimeout(() => {
+//             galleryContainer.style.transition = 'none'; 
+//             currentIndex = items.length * 2 - 1;//11
+//             updateGallery();
+//             setTimeout(() => {
+//                 galleryContainer.style.transition = 'transform 0.5s ease';  
+//             }, 0);
+//         }, 500);
+//     }
+// }
+
+function showPrev() {
     currentIndex--;
-    console.log(currentIndex);
     updateGallery();
-    if (currentIndex === items.length - 1) {//currentIndex = 5
-        currentIndex = items.length * 2 - 1;//11
-        updateGallery();
+    if (currentIndex === items.length - 1) {
+        setTimeout(() => {
+            galleryContainer.style.transition = 'none';
+            currentIndex = items.length * 2 - 1;
+            updateGallery();
+            setTimeout(() => galleryContainer.style.transition = 'transform 1s ease', 0);
+        }, 1000);
     }
 }
 
-nextButton.addEventListener('click', showNext);
+updateGallery();
+galleryContainer.style.transition = 'transform 1s ease';  
+nextButton.addEventListener('click', function() {
+    setTimeout(() => showNext(), 1000);//!!!!!!!
+});
 prevButton.addEventListener('click', showPrev);
 updateGallery();
+
