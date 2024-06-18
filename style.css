@@ -45,6 +45,14 @@ header {
     font-size: 20px;
     font-family: 'Nunito-Bold';
     border-radius: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.hidden {
+    top: calc(-65 / 16 * 1rem);
 }
 
 .main-header {
@@ -184,7 +192,7 @@ header {
     width: 400px;
     height: 100%;
     background-color: #fff;
-    z-index: 999;
+    z-index: 9999;
     filter: blur(0px);
     transition: right 0.3s ease;
     font-family: 'Nunito-Bold';
@@ -308,6 +316,9 @@ header {
         width: calc(165/16*1rem);
     }
 }
+main {
+    margin-top: calc(65 / 16 * 1rem);
+}
 .gallery {
     display: flex;
     align-items: center;
@@ -365,7 +376,9 @@ header {
 }
 
 .head1 {
+    margin: 0;
     margin-left: 2.5rem;
+    padding: 2.5rem 0;
     font-size: 48px;
     /* transform: translateX(300px); */
 }

@@ -219,19 +219,20 @@ function showNext(){
     currentIndex++;
     console.log(currentIndex);
     updateGallery();
-    if (currentIndex === galleryItems.length - items.length) {//currentIndex = 18-6 =12
+    if (currentIndex === galleryItems.length - items.length - 1) {//currentIndex = 18-6 =12
         // console.log(currentIndex);//12
         // console.log(galleryItems.length);//18
         // console.log(items.length);//6
-        setTimeout(() => {
-            galleryContainer.style.transition = 'none';
-            currentIndex = items.length;//6
-            updateGallery();
-            setTimeout(() => galleryContainer.style.transition = 'transform 1s ease', 0);
-        }, 1000);
+            setTimeout(() => {    
+                galleryContainer.style.transition = 'none';
+                currentIndex = items.length;//6
+                updateGallery();
+                setTimeout(() => galleryContainer.style.transition = 'transform 1s ease', 0);
+            }, 1000);    
     }
 }
 
+//galleryContainer.addEventListener('transitionend', function() {});
 // a = 10 
 // '10' == 10 - true
 // '10' === 10 - false
@@ -239,43 +240,47 @@ function showNext(){
 // false == 0 - true
 // false === 0 - false
 
-// function showPrev(){
-//     // currentIndex = currentIndex - 1;
-//     currentIndex--;
-//     console.log(currentIndex);
-//     updateGallery();
-//     //!!!!
-//     galleryContainer.style.transition = 'transform 0.5s ease'
-//     if (currentIndex === items.length - 1) {//currentIndex = 5
-//         setTimeout(() => {
-//             galleryContainer.style.transition = 'none'; 
-//             currentIndex = items.length * 2 - 1;//11
-//             updateGallery();
-//             setTimeout(() => {
-//                 galleryContainer.style.transition = 'transform 0.5s ease';  
-//             }, 0);
-//         }, 500);
+function showPrev() {
+     currentIndex--;
+     updateGallery();
+ 
+     if (currentIndex === itemsGallery.length - 1) {
+         setTimeout(() => {
+             galleryContainer.style.transition = 'none';
+             currentIndex = itemsGallery.length * 2 - 1;
+             updateGallery();
+             setTimeout(() => galleryContainer.style.transition = 'transform 1s ease', 0);
+         }, 1000);
+     }
+}
+
+// function handleWheel(event) {
+//     event.preventDefault();
+//     if (event.deltaY > 0) {
+//         showNext();
+//     } else {
+//         showPrev();
 //     }
 // }
 
-function showPrev() {
-    currentIndex--;
-    updateGallery();
-    if (currentIndex === items.length - 1) {
-        setTimeout(() => {
-            galleryContainer.style.transition = 'none';
-            currentIndex = items.length * 2 - 1;
-            updateGallery();
-            setTimeout(() => galleryContainer.style.transition = 'transform 1s ease', 0);
-        }, 1000);
-    }
-}
-
 updateGallery();
 galleryContainer.style.transition = 'transform 1s ease';  
-nextButton.addEventListener('click', function() {
-    setTimeout(() => showNext(), 1000);//!!!!!!!
-});
+nextButton.addEventListener('click', showNext);
 prevButton.addEventListener('click', showPrev);
+//galleryContainer.addEventListener('wheel', handleWheel);
 updateGallery();
 
+const header = document.querySelector('header');
+
+let lastScrollTop = 0; //змінна для збереження позиції останнього скролінгу
+
+window.addEventListener ('scroll', () => {
+    let scrollTop = window.scrollY || document.documentElement.scrollTop;//поточна позиція скролінгу
+    if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+        header.classList.add('hidden');
+    } else if (scrollTop < lastScrollTop) {
+        header.classList.remove('hidden');
+    }
+
+    lastScrollTop = scrollTop;
+});
