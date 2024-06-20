@@ -40,7 +40,7 @@ body {
     font-family: 'Nunito-Bold';
     background-color: white;
 }
-header {
+header.content {
     background-color: var(--grayNike);
     font-size: 20px;
     font-family: 'Nunito-Bold';
@@ -50,8 +50,9 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
+    transition: top 0.3s ease-in-out;
 }
-.hidden {
+header.content.hidden {
     top: calc(-65 / 16 * 1rem);
 }
 
@@ -330,6 +331,8 @@ main {
     display: flex;
     gap: 30px;
     width: max-content;
+    /* position: relative; */
+    transition: transform 1s ease-in-out;
     /* transform: translateX(0);
     transition: transform 1 ease; */
     /* overflow-x: scroll; */

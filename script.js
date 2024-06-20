@@ -204,10 +204,12 @@ const nextButton = document.querySelector('.next');
 let currentIndex = items.length;//поточний індекс елемента 6
 
 
+
 function updateGallery() {
     let itemWidth = galleryItems[0].clientWidth + 30;//600+30=630px
     let offset = -currentIndex * itemWidth;//-(-1)*630
     console.log(offset);
+    console.log(currentIndex);
     galleryContainer.style.transform = `translateX(${offset}px)`;
     //якщо translateX(+) - то рух =>
     //якщо translateX(-) - то рух <=
@@ -223,12 +225,14 @@ function showNext(){
         // console.log(currentIndex);//12
         // console.log(galleryItems.length);//18
         // console.log(items.length);//6
-            setTimeout(() => {    
-                galleryContainer.style.transition = 'none';
-                currentIndex = items.length;//6
-                updateGallery();
-                setTimeout(() => galleryContainer.style.transition = 'transform 1s ease', 0);
-            }, 1000);    
+        currentIndex = items.length;//6
+        updateGallery();
+            // setTimeout(() => {    
+            //     galleryContainer.style.transition = 'none';
+            //     currentIndex = items.length;//6
+            //     updateGallery();
+            //     setTimeout(() => galleryContainer.style.transition = 'transform 1s ease', 0);
+            // }, 1000);    
     }
 }
 
@@ -245,38 +249,41 @@ function showPrev() {
      updateGallery();
  
      if (currentIndex === itemsGallery.length - 1) {
-         setTimeout(() => {
+        // currentIndex = itemsGallery.length * 2 - 1;
+        // updateGallery();
+        currentIndex = itemsGallery.length * 2 - 1; 
+        setTimeout(() => {
              galleryContainer.style.transition = 'none';
-             currentIndex = itemsGallery.length * 2 - 1;
              updateGallery();
-             setTimeout(() => galleryContainer.style.transition = 'transform 1s ease', 0);
+             requestAnimationFrame(() => {
+                galleryContainer.style.transition = 'transform 1s ease-in-out';
+            });
          }, 1000);
      }
+    // if (currentIndex < itemsGallery.length) {
+    //     currentIndex = galleryItems.length - itemsGallery.length;
+    //     setTimeout(() => {
+    //         galleryContainer.style.transition = 'none';
+    //         updateGallery();
+    //         requestAnimationFrame(() => {
+    //             galleryContainer.style.transition = 'transform 1s ease-in-out';
+    //         });
+    //     }, 1000);
+    // }
 }
 
-// function handleWheel(event) {
-//     event.preventDefault();
-//     if (event.deltaY > 0) {
-//         showNext();
-//     } else {
-//         showPrev();
-//     }
-// }
-
 updateGallery();
-galleryContainer.style.transition = 'transform 1s ease';  
+//galleryContainer.style.transition = 'transform 1s ease';  
 nextButton.addEventListener('click', showNext);
 prevButton.addEventListener('click', showPrev);
-//galleryContainer.addEventListener('wheel', handleWheel);
-updateGallery();
 
-const header = document.querySelector('header');
+const header = document.querySelector('header.content');
 
 let lastScrollTop = 0; //змінна для збереження позиції останнього скролінгу
 
 window.addEventListener ('scroll', () => {
     let scrollTop = window.scrollY || document.documentElement.scrollTop;//поточна позиція скролінгу
-    if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+    if ((scrollTop > lastScrollTop) && (scrollTop > header.offsetHeight)) {
         header.classList.add('hidden');
     } else if (scrollTop < lastScrollTop) {
         header.classList.remove('hidden');
@@ -284,3 +291,33 @@ window.addEventListener ('scroll', () => {
 
     lastScrollTop = scrollTop;
 });
+
+//Масиви
+//Оголешення масиву
+let cars = ["BMW", "Porche", "Audi"];
+
+//alert(cars);
+//alert(cars[2]);
+
+cars[2] = "Ferrari";
+//alert(cars);
+//alert(cars[2]);
+
+
+console.log(cars.length);
+for (let i = 0; i < cars.length; i++){
+    console.log(i, cars[i]);
+}
+
+function letterFinder (word, match) {
+    for (let i = 0; i < word.length; i++){
+        if (word[i] == match)
+        {
+            console.log(i, word[i]);
+        } else console.log('Такої літери в цьому слові немає.');
+    }
+
+}
+ //word = ['c', 'a', 't'];
+letterFinder ('Andriy', 'd');
+letterFinder ('Andriy', 'a');
