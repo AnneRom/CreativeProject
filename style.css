@@ -386,6 +386,12 @@ main {
     /* transform: translateX(300px); */
 }
 
+.prev.disabled,
+.next.disabled {
+    pointer-events: none; /* Вимикає можливість натискання */
+    opacity: 0.5; /* Зменшує непрозорість для візуальної індикації */
+}
+
 @keyframes slide {
     0%
     {

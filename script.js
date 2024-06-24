@@ -203,77 +203,64 @@ const prevButton = document.querySelector('.prev');
 const nextButton = document.querySelector('.next');
 let currentIndex = items.length;//поточний індекс елемента 6
 
-
-
-function updateGallery() {
+function updateGallery(transition = true) {
     let itemWidth = galleryItems[0].clientWidth + 30;//600+30=630px
     let offset = -currentIndex * itemWidth;//-(-1)*630
     console.log(offset);
     console.log(currentIndex);
+    if (transition == true){
+        galleryContainer.style.transition = 'transform 0.5s ease'; 
+    } else {
+        galleryContainer.style.transition = 'none'; 
+    }
     galleryContainer.style.transform = `translateX(${offset}px)`;
     //якщо translateX(+) - то рух =>
     //якщо translateX(-) - то рух <=
 }
-console.log(galleryItems.length);
 
-function showNext(){
-    // currentIndex = currentIndex + 1;
-    currentIndex++;
-    console.log(currentIndex);
-    updateGallery();
-    if (currentIndex === galleryItems.length - items.length - 1) {//currentIndex = 18-6 =12
-        // console.log(currentIndex);//12
-        // console.log(galleryItems.length);//18
-        // console.log(items.length);//6
-        currentIndex = items.length;//6
-        updateGallery();
-            // setTimeout(() => {    
-            //     galleryContainer.style.transition = 'none';
-            //     currentIndex = items.length;//6
-            //     updateGallery();
-            //     setTimeout(() => galleryContainer.style.transition = 'transform 1s ease', 0);
-            // }, 1000);    
-    }
+function disableButton(button) {
+    button.classList.add('.disabled');
 }
 
-//galleryContainer.addEventListener('transitionend', function() {});
-// a = 10 
-// '10' == 10 - true
-// '10' === 10 - false
-//  10 === 10 - true
-// false == 0 - true
-// false === 0 - false
+function enableButton(button) {
+    button.classList.remove('.disabled');
+}
+
+function showNext(){
+    if (nextButton.classList.contains('.disabled')) return;//якщо кнопка неактивна, то функція showNext() не працює 
+
+    currentIndex++;
+    disableButton(nextButton);
+    updateGallery();
+
+    if (currentIndex === galleryItems.length - items.length) {
+        galleryContainer.addEventListener('transitionend', () => {
+            currentIndex = items.length;
+            updateGallery(false); 
+            enableButton(nextButton);
+        }, { once: true });//once: true - обробник подій працює один раз і автоматично видаляється           
+    } else {
+        galleryContainer.addEventListener('trasitionend', () => {
+            enableButton(nextButton);
+        }, { once: true });
+    }
+}
 
 function showPrev() {
      currentIndex--;
      updateGallery();
  
      if (currentIndex === itemsGallery.length - 1) {
-        // currentIndex = itemsGallery.length * 2 - 1;
-        // updateGallery();
-        currentIndex = itemsGallery.length * 2 - 1; 
-        setTimeout(() => {
-             galleryContainer.style.transition = 'none';
-             updateGallery();
-             requestAnimationFrame(() => {
-                galleryContainer.style.transition = 'transform 1s ease-in-out';
-            });
-         }, 1000);
+        galleryContainer.addEventListener('transitionend', () => {
+            currentIndex = itemsGallery.length * 2 - 1; 
+            updateGallery(false); 
+        }, { once: true });
      }
-    // if (currentIndex < itemsGallery.length) {
-    //     currentIndex = galleryItems.length - itemsGallery.length;
-    //     setTimeout(() => {
-    //         galleryContainer.style.transition = 'none';
-    //         updateGallery();
-    //         requestAnimationFrame(() => {
-    //             galleryContainer.style.transition = 'transform 1s ease-in-out';
-    //         });
-    //     }, 1000);
-    // }
+
 }
 
-updateGallery();
-//galleryContainer.style.transition = 'transform 1s ease';  
+
+updateGallery(false);
 nextButton.addEventListener('click', showNext);
 prevButton.addEventListener('click', showPrev);
 
@@ -309,7 +296,7 @@ for (let i = 0; i < cars.length; i++){
     console.log(i, cars[i]);
 }
 
-function letterFinder (word, match) {
+function letterFinder (word, match = 'a') {
     for (let i = 0; i < word.length; i++){
         if (word[i] == match)
         {
@@ -319,5 +306,5 @@ function letterFinder (word, match) {
 
 }
  //word = ['c', 'a', 't'];
-letterFinder ('Andriy', 'd');
-letterFinder ('Andriy', 'a');
+letterFinder ('Andriy', );
+letterFinder ('Andriy', 'w');
