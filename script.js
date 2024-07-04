@@ -11,6 +11,10 @@ let animationInProgress = false;//Чи вже триває анімація?
 
 let previousCatalogDiv = null;//відповідає за зберігання попередгього каталогу(той, на який було наведено курсор миші до цього)
 let showCatalogTimer = null;//змінна для зберігання таймеру перед викликом функції showCatalog()
+
+const header = document.querySelector('header.content');
+const mainHeader = document.querySelector('header.content .main-header');
+const catalog = document.querySelectorAll('header.content .catalog');
 // ! - НЕ
 // || - AБО
 // && - І
@@ -22,9 +26,18 @@ let showCatalogTimer = null;//змінна для зберігання тайм�
 //     hideCatalog(previousCatalogDiv, true);
 // });
 
-menuUl.addEventListener('mouseleave', function() {
-    hideCatalog(previousCatalogDiv, true);
-});
+menuUl.addEventListener('mouseleave', function(event) {
+    // Перевірка, чи мишка все ще на хедері
+    if (event.relatedTarget && mainHeader.contains(event.relatedTarget)) {
+      hideCatalog(previousCatalogDiv, true);
+  }
+  });
+
+  catalog.forEach((catalogItem) => {
+    catalogItem.addEventListener('mouseleave', function() {
+        hideCatalog(previousCatalogDiv, true);
+    });
+  })
 
 items.forEach((itemList, index) => {
     let catalogDiv = document.getElementById(`catalog-${index+1}`);
@@ -53,11 +66,21 @@ items.forEach((itemList, index) => {
     });
 });
 
-
-//isCatalogVisible = true;
+function hideAllCatalogs(){
+    items.forEach((itemList, index) => {
+        let catalogDiv = document.getElementById(`catalog-${index+1}`);//пошук каталогу
+        if (catalogDiv){//якщо каталог знайдено
+            catalogDiv.style.display = 'none';//сховати
+        }
+    });
+    isCatalogVisible = false;
+    animationInProgress = false;
+}
 
 function showCatalog(catalogDiv, withAnimation) {
     console.log("showCatalog");
+   
+    hideAllCatalogs();
 
     if (withAnimation){
         //(withAnimation) => withAnimation == true 
@@ -218,44 +241,56 @@ function updateGallery(transition = true) {
     //якщо translateX(-) - то рух <=
 }
 
-function disableButton(button) {
-    button.classList.add('.disabled');
+function disableButton(disablePrev = true, disableNext = true) {
+    if (disablePrev == true){
+        prevButton.classList.add('disabled');
+    } 
+    if (disableNext == true){
+        nextButton.classList.add('disabled');
+    }
 }
 
-function enableButton(button) {
-    button.classList.remove('.disabled');
+function enableButton(enablePrev = true, enableNext = true) {
+    if (enablePrev) {
+        prevButton.classList.remove('disabled');
+    }
+    if (enableNext) {
+        nextButton.classList.remove('disabled');
+    }
 }
 
 function showNext(){
-    if (nextButton.classList.contains('.disabled')) return;//якщо кнопка неактивна, то функція showNext() не працює 
+    if (nextButton.classList.contains('disabled')) return;//якщо кнопка неактивна, то функція showNext() не працює 
 
     currentIndex++;
-    disableButton(nextButton);
+    disableButton(false, true);
     updateGallery();
 
     if (currentIndex === galleryItems.length - items.length) {
         galleryContainer.addEventListener('transitionend', () => {
             currentIndex = items.length;
             updateGallery(false); 
-            enableButton(nextButton);
+            enableButton(false, true);
         }, { once: true });//once: true - обробник подій працює один раз і автоматично видаляється           
     } else {
-        galleryContainer.addEventListener('trasitionend', () => {
-            enableButton(nextButton);
-        }, { once: true });
+        galleryContainer.addEventListener('transitionend', () => enableButton(false, true), { once: true });
     }
 }
 
 function showPrev() {
      currentIndex--;
+     disableButton(true, false);
      updateGallery();
  
      if (currentIndex === itemsGallery.length - 1) {
         galleryContainer.addEventListener('transitionend', () => {
             currentIndex = itemsGallery.length * 2 - 1; 
             updateGallery(false); 
+            enableButton(true, false);
         }, { once: true });
-     }
+     } else {
+        galleryContainer.addEventListener('transitionend', () => enableButton(true, false), { once: true });
+    }
 
 }
 
@@ -263,8 +298,6 @@ function showPrev() {
 updateGallery(false);
 nextButton.addEventListener('click', showNext);
 prevButton.addEventListener('click', showPrev);
-
-const header = document.querySelector('header.content');
 
 let lastScrollTop = 0; //змінна для збереження позиції останнього скролінгу
 
@@ -281,17 +314,19 @@ window.addEventListener ('scroll', () => {
 
 //Масиви
 //Оголешення масиву
-let cars = ["BMW", "Porche", "Audi"];
+let cars = ["BMW", "Reno", "Audi"];
+let fruits = [];
 
 //alert(cars);
-//alert(cars[2]);
+//alert(cars[2]);//"Audi"
 
 cars[2] = "Ferrari";
+cars[1] = "Lada";
 //alert(cars);
 //alert(cars[2]);
 
 
-console.log(cars.length);
+console.log(cars.length);//довжина масиву - кількість елементів
 for (let i = 0; i < cars.length; i++){
     console.log(i, cars[i]);
 }
@@ -303,8 +338,11 @@ function letterFinder (word, match = 'a') {
             console.log(i, word[i]);
         } else console.log('Такої літери в цьому слові немає.');
     }
-
 }
+
+console.log('letterFinder');
  //word = ['c', 'a', 't'];
-letterFinder ('Andriy', );
+letterFinder ('Hanna', );
 letterFinder ('Andriy', 'w');
+letterFinder ('Andriy', 'y');
+
