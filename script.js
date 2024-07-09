@@ -15,10 +15,7 @@ let showCatalogTimer = null;//змінна для зберігання тайм�
 const header = document.querySelector('header.content');
 const mainHeader = document.querySelector('header.content .main-header');
 const catalog = document.querySelectorAll('header.content .catalog');
-// ! - НЕ
-// || - AБО
-// && - І
-//комбінація клавіш щоб закоментувати/розкоментувати виділений код -> ctrl + /
+
 
 // let menuContainer = document.querySelector('.menu ul');
 
@@ -311,38 +308,4 @@ window.addEventListener ('scroll', () => {
 
     lastScrollTop = scrollTop;
 });
-
-//Масиви
-//Оголешення масиву
-let cars = ["BMW", "Reno", "Audi"];
-let fruits = [];
-
-//alert(cars);
-//alert(cars[2]);//"Audi"
-
-cars[2] = "Ferrari";
-cars[1] = "Lada";
-//alert(cars);
-//alert(cars[2]);
-
-
-console.log(cars.length);//довжина масиву - кількість елементів
-for (let i = 0; i < cars.length; i++){
-    console.log(i, cars[i]);
-}
-
-function letterFinder (word, match = 'a') {
-    for (let i = 0; i < word.length; i++){
-        if (word[i] == match)
-        {
-            console.log(i, word[i]);
-        } else console.log('Такої літери в цьому слові немає.');
-    }
-}
-
-console.log('letterFinder');
- //word = ['c', 'a', 't'];
-letterFinder ('Hanna', );
-letterFinder ('Andriy', 'w');
-letterFinder ('Andriy', 'y');
 
