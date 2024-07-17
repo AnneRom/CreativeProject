@@ -103,10 +103,10 @@ console.log(fruits);
 //shift/unshift, працюють повільно.
 
 //Цикли
-let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-let sumEven = 0, sumOdd = 0;
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 101, 46, 55, 64];
+let sumEven = 0, sumOdd = 0, sum1 = 0;
 let factorial = 1;
-
+//Цикли і масиви. Індекси для масивів, виведення поточного, попереднього та наступного елментів масиву. Додали код, що рахує суму елементів через один.
 console.log(numbers);
 
 for (let i = 0; i < numbers.length; i++){
@@ -117,15 +117,35 @@ for (let i = 0; i < numbers.length; i++){
         sumOdd = sumOdd + numbers[i];
     }
     factorial = factorial * numbers[i];
+
+    if (numbers[i] == numbers[0]){
+        console.log('Поточне число:', numbers[i]);
+        console.log('Наступне число:', numbers[i+1]);
+    } else if (numbers[i] == numbers[numbers.length - 1]){
+        console.log('Попереднє число:', numbers[i-1]);
+        console.log('Поточне число:', numbers[i]);
+    } else {
+        console.log('Попереднє число:', numbers[i-1]);
+        console.log('Поточне число:', numbers[i]);
+        console.log('Наступне число:', numbers[i+1]);
+    }
+//    // sum1 = sum1 + numbers[i++];
+//    if(numbers[i] == numbers[numbers.length-2]){
+//     console.log('Sum1:',  sum1);
+//     sum1 = sum1 + numbers[i+2];
+//    }
 }
 console.log('Sum of even numbers:', sumEven);
 console.log('Sum of odd numbers:', sumOdd);
+console.log('Sum1:',  sum1);
 console.log('Factorial:', factorial);
 
 // for...of
+//numbers = [101, 46, 55, 64, 99, 100];
 sumEven = 0;
 sumOdd = 0;
 factorial = 1;
+//цикл працює від першого елменту масиву до останнього
 for (let num of numbers){
     console.log(num);
     if (num % 2 == 0){//numbers[i]%2 - остача від ділення на 2
@@ -133,8 +153,49 @@ for (let num of numbers){
     } else {
         sumOdd = sumOdd + num;
     }
-    factorial = factorial * num;
+    //factorial = factorial * num;
+
 }
 console.log('Sum of even numbers:', sumEven);
 console.log('Sum of odd numbers:', sumOdd);
-console.log('Factorial:', factorial);
+//console.log('Factorial:', factorial);
+
+console.log(numbers[0]);
+console.log(numbers[numbers.length - 1]);
+
+let temp;
+temp = numbers[0];//temp = 1
+numbers[0] = numbers[numbers.length - 1];//numbers[0] = 64
+numbers[numbers.length - 1] = temp;//numbers[numbers.length - 1] = 1
+
+console.log(numbers[0]);
+console.log(numbers[numbers.length - 1]);
+console.log(numbers);
+
+console.log(numbers.length);
+numbers.length = 10;//процес скорочення елментів масиву - незворотній
+console.log(numbers);
+
+numbers.length = 14;
+console.log(numbers);
+
+numbers.length = 0;//повне очищення масиву
+console.log(numbers);
+
+let num1 = [64, 83, 29, 10, 18, 19, 35, 20, 24, 101];
+let num2 = [83, 10, 65, 10, 77, 89, 24, 99, 100, 101];
+let num3 = [];
+for (let i = 0; i < num1.length; i++){
+    if (num1[i] == num2[i]){
+        num3[i] = num1[i];//10
+        console.log(num3[i]);
+    }
+}
+console.log(num3);
+
+let styles = ["Jazz", "Blues"];
+console.log(styles);
+
+styles.push("Rock-n-Roll");
+console.log(styles);
+
