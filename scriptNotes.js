@@ -199,3 +199,88 @@ console.log(styles);
 styles.push("Rock-n-Roll");
 console.log(styles);
 
+//Об'єкти
+let newModelBMW = {
+    name: "BMW M4 CS",
+    price: "Starts from £117,100",
+    "hourse power": 510,
+    turbocharging: true,
+    color: "darkgreen",
+};
+
+//доступ до ключів через крапку
+//виведення значень об'єкту
+console.log(newModelBMW);
+console.log(newModelBMW.name);
+console.log(newModelBMW.price);
+//console.log(newModelBMW.hoursePower);
+console.log(newModelBMW.turbocharging);
+console.log(newModelBMW.color);
+
+//додати/видалити властивості(ключі) об'єкту
+newModelBMW.engine = "3.0-litre";
+newModelBMW.engineForm = "diamond";
+console.log(newModelBMW);
+
+delete newModelBMW.turbocharging;
+console.log(newModelBMW);
+
+//доступ до ключів через квадратні дужки
+console.log(newModelBMW["name"]);// = console.log(newModelBMW.name);
+
+newModelBMW["turbocharging"] = true;
+console.log(newModelBMW["turbocharging"]);
+delete newModelBMW.turbocharging;
+
+delete newModelBMW["turbocharging"];// = delete newModelBMW.turbocharging;
+console.log(newModelBMW);
+
+delete newModelBMW["hoursePower"];
+
+//коли саме використовувати тільки [ ]
+//коли назви ключа має декілька слів
+newModelBMW["hourse power"] = 550;//з крапкою неможливо newModelBMW.hourse power 
+console.log(newModelBMW);
+
+//[ ] дозволяють звернутися до властивості, ім'я якої може бути результатом виразу
+let key = "really pretty";
+
+newModelBMW[key] = true;// newModelBMW["really pretty"] = true;
+//newModelBMW.key = true;
+console.log(newModelBMW);
+
+//let keyInput = prompt('Введіть, яку властивість моделі BMW M4 хочете побачити?', );//keyInput = те, що ми ввели
+//keyInput = "name"
+//keyInput = "color"
+
+//console.log(newModelBMW[keyInput]);//newModelBMW["color"] - > darkgreen
+
+//обчислювальні властивості [ ]
+let fruit = "apple";
+//let fruit = prompt("Які фрукти купити?", "apple");
+let vegatable = "potato";
+
+let bag = {
+    [fruit + "Sweet"]: 5,
+    [vegatable]: 10,
+};
+
+// let bag = {};
+// bag[fruit] = 5;
+
+console.log(bag);
+
+function makeUser(name, age) {
+    return {
+        name, // = name: name, 
+        age,  // = age: age,   
+    };
+};
+
+let user = makeUser("Hanna", "22");
+console.log(user);
+
+//оператор пошуку in
+//Перевіряє чи існує ключ в об'єкті? = true/false
+console.log( "name" in user );
+console.log( "region" in user );
