@@ -273,7 +273,8 @@ console.log(bag);
 function makeUser(name, age) {
     return {
         name, // = name: name, 
-        age,  // = age: age,   
+        age,  // = age: age,
+        test: undefined,   
     };
 };
 
@@ -284,3 +285,72 @@ console.log(user);
 //Перевіряє чи існує ключ в об'єкті? = true/false
 console.log( "name" in user );
 console.log( "region" in user );
+console.log("test" in user);
+
+let developer = {
+    name: "Tom",
+    age: 25,
+    softSkills: 80,
+    techSkills: 70,
+    health: 100,
+}
+
+//цикл for...in (має доступ до ключів/властивостей + до значень)
+for (let key in developer) {
+    //key - назва ключа/властивості
+    // console.log(key);
+    // console.log(developer[key]);
+    console.log(key, developer[key]);
+}
+
+let codes = {
+    "+49": "Німеччина",
+    "+41": "Швейцарія",
+    "+44": "Великобританія",
+    "+38": "Україна",
+    "+1": "США",
+}
+//впорядкування властивостей об'єкта
+//"49" - цілочисельне ім'я властивості, цикл for...in впорядковує їх за зростанням
+for (let key in codes) {
+    console.log(key, codes[key]);
+}
+
+//завдання 1
+//1
+let user1 = {};
+//2
+// user1.name = "Ivan";
+user1["name"] = "Ivan";
+// //3
+// user1.surname = "Smith";
+user1["surname"] = "Smith";
+// //4
+// user1.name = "Petro";
+user1["name"] = "Petro";
+// //5
+// delete user1.name
+delete user1["name"];
+
+console.log(user1);
+
+//завдання 2
+function isEmpty(obj){
+    // if ("8:30" in obj){
+    //     return false;
+    // }
+    // else return true;  
+    for (let key in obj){
+        return false;
+    }
+    return true;
+}
+let schedule = {};
+
+//let result = isEmpty(schedule);
+console.log( isEmpty(schedule) ); // true
+
+schedule["8:30"] = "Вставай";
+console.log(schedule);
+
+console.log( isEmpty(schedule) ); // false
