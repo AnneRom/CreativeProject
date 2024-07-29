@@ -354,3 +354,67 @@ schedule["8:30"] = "Вставай";
 console.log(schedule);
 
 console.log( isEmpty(schedule) ); // false
+
+//Bugs та Errors
+//Bugs - помилка в коді, яка не зупиняє програму, еле прошграма веде себе непередбачувано(не так як нам хочеться)
+//Errors - помилка в коді, яка повністю зупиняє програму
+
+/////////////////////////////////////////////////////
+//Syntax Error - шматок коду, який не можна прочитати
+
+//SyntaxError: Unexpected EOF
+//let error = "Syntax; 
+
+//SyntaxError: Unexpected identifier 'b'. Expected a ')' or a ',' after a parameter declaration.
+// function add(a b){
+//     let result = a + b;
+
+//     if (result > 10){
+//         console.log("Error"); 
+//         if (result > 20) //SyntaxError: Unexpected token '}'. Expected a statement as the body of an if block.
+//     }
+    //return a + b;
+//}
+
+/////////////////////////////////////////////////////
+//Reference error(помилки під час виконання)
+
+//ReferenceError: Can't find variable: a
+//console.log(a); 
+
+// function greeting(){
+//     var greeting = "Hello Word!";
+//     console.log(greting);//ReferenceError: Can't find variable: greting
+//     //ReferenceError: greting is not  defined
+// }
+
+// greeting();
+
+/////////////////////////////////////////////////////
+//Type error - помилка, коли значення не відповідає очікуваному типу
+
+// function multiple(a, b){
+//     console.log(a * b);//NaN - Not a Number
+// }
+
+// multiple("Десять", "Десять");
+
+// const a = 1;
+// a = 10;
+//TypeError: Attempted to assign to readonly property.
+//TypeError: Assignment to constant variable
+
+// let a = 1;
+// console.log(a());
+//TypeError: a is not a function. (In 'a()', 'a' is 1)
+
+//(5).pop();
+//TypeError: (5).pop is not a function. (In '(5).pop()', '(5).pop' is undefined)
+
+/////////////////////////////////////////////////////
+//Range Error - помилка виникає тоді, коли аргументи функції виходять за межі дозволеного діапазону вхідних значень
+// console.log((10).toString(2));
+// console.log((104384984).toString(16));
+// console.log((10).toString(100));//RangeError: toString() radix argument must be between 2 and 36
+//2-36
+
