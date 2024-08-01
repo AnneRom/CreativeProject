@@ -418,3 +418,37 @@ console.log( isEmpty(schedule) ); // false
 // console.log((10).toString(100));//RangeError: toString() radix argument must be between 2 and 36
 //2-36
 
+//try..catch
+try {
+    // let d = 1;
+    // let c = 10;
+    //console.log(c + d);
+
+    // let a = 1;
+    // console.log(a());
+
+    //console.log((10).toString(100));
+} catch(err) { //err = "ReferenceError: Can't find variable: c"
+    console.log("Block Catch");
+    console.log(err);
+}
+
+console.log("This line runs");
+
+//коли нема помилок, блок catch ігнорується
+//коли виникає помилка в блоці try, блок try зупиняється, спрацьовує блок catch
+//try..catch НЕ може ловити синтаксичні помилки(SyntaxError)
+
+try {
+    // setTimeout(function() {
+    //     LALALA;
+    // }, 1000)
+
+} catch (err){
+    console.log("Block Catch");
+    console.log(err);
+}
+
+console.log("This line runs");
+
+//блоки try та catch працюють синхронно, тому коли в блоці try є затримка, помилка не ловиться
