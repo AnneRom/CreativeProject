@@ -521,36 +521,60 @@ main {
 }
 
 .new-item  {
-    background: url(images/AirJordan1.webp);
-    width: calc(100%/3);
-    height: 500px;
-    background-repeat: no-repeat;
-    background-size: cover;
+    position: relative;
+    width: calc(100% / 3);
+    height: 600px;
+    overflow: hidden;
 }
 
-/* .new-item #jordan-rise {
-    background: url(images/JordanRise.webp);
-    width: calc(100%/3);
-    height: 500px;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.new-item #air-jordan-1-back {
-    background: url(images/AirJord1back.webp);
-    width: calc(100%/3);
-    height: 500px;
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
-
-
-/* .new-item img {
+.new-item img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
-    height: 500px;
-    display: block;
-    background-size: cover;
-} */
+    height: auto;
+    object-fit: cover;
+}
+
+.new-below {
+    margin: 50px auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.new-below .new-button {
+    background-color: black;
+    color: #fff;
+    font-size: 20px;
+    width: 200px;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+@media (max-width: 1200px) {
+    .new-item {
+        height: 500px;
+    }
+}
+
+@media (max-width: 800px) {
+    .new-item {
+        width: 100%;
+        height: 600px;
+    }
+    .new-item:nth-child(1), .new-item:nth-child(3) {
+        display: none;
+    }
+    .new-item img {
+        top: 75%;
+    }
+}
+
+
 
 /*
 .search input[type="search"] {
