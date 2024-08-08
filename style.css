@@ -330,12 +330,22 @@ main {
 .articles-item {
     position: relative;
     width: 50%;
+    /* overflow: hidden;
+    box-sizing: border-box;
+    height: 450px; */
 }
 
 .articles-item img {
     width: 100%;
     height: auto;
     display: block;
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+    object-fit: cover; */
 }
 
 .articles-overlay {
@@ -344,6 +354,7 @@ main {
     bottom: 50px;
     color: #fff;
     font-size: 16px;
+    /* z-index: 9999; */
 }
 
 .articles-overlay h3 {
@@ -369,6 +380,13 @@ main {
     background-color: var(--darkGrayNike);
 }
 
+@media (min-width: 1200px) {
+    /* Стили для великих екранів */
+    .articles-item {
+        height: 400px;
+     }
+}
+
 @media screen and (max-width: 900px){
     .articles-overlay {
         font-size: 14px;
@@ -386,6 +404,7 @@ main {
 
 @media screen and (max-width: 600px){
     .articles-item {
+        /* height: 350px; */
         width: 100%;
     }
     .articles-overlay {
@@ -546,6 +565,16 @@ main {
     flex-direction: column;
 }
 
+.new-below h1 {
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.new-below a {
+    text-decoration: none;
+    color: #fff;
+}
+
 .new-below .new-button {
     background-color: black;
     color: #fff;
@@ -553,6 +582,51 @@ main {
     width: 200px;
     padding: 5px;
     border-radius: 20px;
+    opacity: 1;
+}
+
+.new-below .new-button:hover {
+    opacity: 0.5;
+}
+
+.category {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 100px;
+    background-color: var(--darkGrayNike);
+    max-height: 9em;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.category:hover {
+    max-height: 80em;
+}
+
+.category-item h2 {
+    margin: 0;
+    margin-bottom: 24px;
+}
+
+.category-item ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.category-item ul li {
+    margin-bottom: 12px;
+}
+
+.category-item ul a{
+    text-decoration: none;
+    color: #707072;
+    font-size: 16px;
+}
+
+.category-item ul a:hover{
+    color: black;
 }
 
 @media (max-width: 1200px) {
