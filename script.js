@@ -309,3 +309,42 @@ window.addEventListener ('scroll', () => {
     lastScrollTop = scrollTop;
 });
 
+const category = document.querySelector('.category');
+console.log(category);
+
+console.log(document.documentElement.scrollTop);
+
+category.addEventListener('mouseenter', () => {
+    // category.scrollTop = category.scrollHeight;
+    // category.scrollTop = 500;
+    // document.documentElement.scrollTop = 1800;
+    // console.log(document.documentElement.scrollTop);
+});
+
+const categoryHeader = document.querySelectorAll('.category-item h2');
+console.log(categoryHeader);
+const categoryUl = document.querySelectorAll('.category-item ul');
+console.log(categoryUl);
+
+categoryHeader.forEach((header, index) => {
+    console.log(header);
+    console.log(index);
+    header.addEventListener('click', () => {
+        const ul = categoryUl[index];
+        console.log(ul);
+        ul.style.display = 'block';
+    });
+});
+
+const title = document.querySelector(".new-below h1");
+console.log(title);
+
+//Event - об'єкт з інформацією про елемент з який відбулась подія
+title.addEventListener ('click', function(event) {
+    // console.log(event);
+    console.log(event.target);//властивість, яка вказує на об'єкт, де відбулась подія (фактично)
+    console.log(event.type);//тип події
+    console.log(event.сurrentTarget);//властивість, яка вказує на об'єкт, до якого було підключено обробнийк події
+    //event.target може вказувати на дочірній елемент
+    console.log(event.timeStamp);//скільки відбувається подія в мілісекундах
+});
