@@ -452,3 +452,16 @@ try {
 console.log("This line runs");
 
 //блоки try та catch працюють синхронно, тому коли в блоці try є затримка, помилка не ловиться
+
+const title = document.querySelector(".new-below h1");
+console.log(title);
+
+//Event - об'єкт з інформацією про елемент з який відбулась подія
+title.addEventListener ('click', function(event) {
+    // console.log(event);
+    console.log(event.target);//властивість, яка вказує на об'єкт, де відбулась подія (фактично)
+    console.log(event.type);//тип події
+    console.log(event.сurrentTarget);//властивість, яка вказує на об'єкт, до якого було підключено обробнийк події
+    //event.target може вказувати на дочірній елемент
+    console.log(event.timeStamp);//скільки відбувається подія в мілісекундах
+});

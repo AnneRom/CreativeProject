@@ -327,24 +327,20 @@ const categoryUl = document.querySelectorAll('.category-item ul');
 console.log(categoryUl);
 
 categoryHeader.forEach((header, index) => {
-    console.log(header);
-    console.log(index);
+    // console.log(header);
+    // console.log(index);
     header.addEventListener('click', () => {
         const ul = categoryUl[index];
-        console.log(ul);
-        ul.style.display = 'block';
+        // console.log(ul);
+        // ul.style.transition = 'opacity 3s ease';
+        if (ul.style.display === 'block'){
+            ul.style.display = 'none';
+            // ul.style.opacity = '0';
+        } else {
+            ul.style.display = 'block';
+            // ul.style.opacity = '1';
+        }
+        
     });
 });
 
-const title = document.querySelector(".new-below h1");
-console.log(title);
-
-//Event - об'єкт з інформацією про елемент з який відбулась подія
-title.addEventListener ('click', function(event) {
-    // console.log(event);
-    console.log(event.target);//властивість, яка вказує на об'єкт, де відбулась подія (фактично)
-    console.log(event.type);//тип події
-    console.log(event.сurrentTarget);//властивість, яка вказує на об'єкт, до якого було підключено обробнийк події
-    //event.target може вказувати на дочірній елемент
-    console.log(event.timeStamp);//скільки відбувається подія в мілісекундах
-});
