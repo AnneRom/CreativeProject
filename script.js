@@ -321,26 +321,32 @@ category.addEventListener('mouseenter', () => {
     // console.log(document.documentElement.scrollTop);
 });
 
-const categoryHeader = document.querySelectorAll('.category-item h2');
-console.log(categoryHeader);
-const categoryUl = document.querySelectorAll('.category-item ul');
-console.log(categoryUl);
+const mediaQuery = window.matchMedia('(max-width: 600px)'); //слідкує за станом медіазапиту, 
+//якщо ширина екрану менша або дорівнює 600px, то цей об'єкт матиме властивість matches -> true
 
-categoryHeader.forEach((header, index) => {
-    // console.log(header);
-    // console.log(index);
-    header.addEventListener('click', () => {
-        const ul = categoryUl[index];
-        // console.log(ul);
-        // ul.style.transition = 'opacity 3s ease';
-        if (ul.style.display === 'block'){
-            ul.style.display = 'none';
-            // ul.style.opacity = '0';
-        } else {
-            ul.style.display = 'block';
-            // ul.style.opacity = '1';
-        }
+function mediaQueryChange(event) {
+    if (event.matches) {//ширина екрану менша або дорівнює 600px
+        const categoryHeader = document.querySelectorAll('.category-item h2');
+        console.log(categoryHeader);
+        const categoryUl = document.querySelectorAll('.category-item ul');
+        console.log(categoryUl);
         
-    });
-});
+        categoryHeader.forEach((header, index) => {
+            header.addEventListener('click', () => {
+                const ul = categoryUl[index];
+                if (ul.classList.contains('show')){//contains - перевіряє чи міститься клас show в елемені ul
+                    ul.classList.remove('show');
+                } else {
+                    ul.classList.add('show');
+                }
+            });
+        });
 
+    } else {//ширина екрану більша 600px
+
+    }
+}
+
+mediaQueryChange(mediaQuery);//виклик функції одразу після завантаження сторінки
+
+mediaQuery.addListener(mediaQueryChange);
