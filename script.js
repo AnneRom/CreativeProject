@@ -324,29 +324,48 @@ category.addEventListener('mouseenter', () => {
 const mediaQuery = window.matchMedia('(max-width: 600px)'); //слідкує за станом медіазапиту, 
 //якщо ширина екрану менша або дорівнює 600px, то цей об'єкт матиме властивість matches -> true
 
+const categoryHeader = document.querySelectorAll('.category-item h2');
+const categoryUl = document.querySelectorAll('.category-item ul');
+
+let clickHandlers = [];//змінна зберігає всі додані обробники подій
+
+function toggleList (index) {
+    const ul = categoryUl[index];
+    if (ul.classList.contains('show')){//contains - перевіряє чи міститься клас show в елемені ul
+        ul.classList.remove('show');
+    } else {
+        ul.classList.add('show');
+    }
+}
+
 function mediaQueryChange(event) {
+    //видаляємо попередні обробники подій 
+    categoryHeader.forEach((header, index) => {
+        if (clickHandlers[index]) {
+            header.removeEventListener('click', clickHandlers[index]);
+        }
+    });
+
+    clickHandlers = [];
+
     if (event.matches) {//ширина екрану менша або дорівнює 600px
-        const categoryHeader = document.querySelectorAll('.category-item h2');
-        console.log(categoryHeader);
-        const categoryUl = document.querySelectorAll('.category-item ul');
-        console.log(categoryUl);
         
         categoryHeader.forEach((header, index) => {
-            header.addEventListener('click', () => {
-                const ul = categoryUl[index];
-                if (ul.classList.contains('show')){//contains - перевіряє чи міститься клас show в елемені ul
-                    ul.classList.remove('show');
-                } else {
-                    ul.classList.add('show');
-                }
-            });
+            const handler = () => toggleList(index);//handler - оброблювач
+            clickHandlers[index] = handler;
+            header.addEventListener('click', handler);
         });
+        console.log(clickHandlers);
 
     } else {//ширина екрану більша 600px
-
+        categoryUl.forEach((ul) => {
+            ul.classList.remove('show');
+        }); 
     }
+
 }
 
 mediaQueryChange(mediaQuery);//виклик функції одразу після завантаження сторінки
 
-mediaQuery.addListener(mediaQueryChange);
+mediaQuery.addEventListener('change', mediaQueryChange);
+
