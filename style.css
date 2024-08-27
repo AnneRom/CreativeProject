@@ -598,7 +598,8 @@ main {
     height: 8.5em;
     overflow: hidden;
     transition: height 0.5s ease-in-out;
-    margin-bottom: 20px;
+    width: 92%;
+    margin: 0 auto;
 }
 
 .category:hover {
@@ -655,47 +656,8 @@ main {
     }
 }
 
-@media (max-width: 600px) {
-    .category {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .category:hover {
-        height: auto;
-    }
-
-    .category .category-item ul{
-        /* display: none; */
-        margin-left: 50px;
-        margin-bottom: 24px;
-        overflow: hidden;
-        max-height: 0;
-        opacity: 0;
-        transition: max-height 0.5s ease, opacity 0.5s ease;
-
-        /* transition: color 2s ease 0.5s; */
-
-        /* = */
-
-        /* transition-property: color;
-        transition-duration: 2s;
-        transition-timing-function: ease;
-        transition-delay: 0.5s; */
-    }
-
-    .category .category-item ul.show {
-        max-height: 1000px;
-        opacity: 1;
-    }
-
-    .category-item h2 {
-        cursor: pointer;
-    }
-}
-
 hr {
-    width: 95%;
+    width: 92%;
     margin: 50px auto;
 }
 
@@ -704,11 +666,13 @@ hr {
 }
 footer {
     display: flex;
+    flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 20px;
+    gap: 3%;
     height: auto;
-    margin-left: 5%;
+    width: 92%;
+    margin: 0 auto;
 }
 
 .footer-item h2 {
@@ -719,7 +683,7 @@ footer {
 }
 
 .footer-item {
-    width: 200px;
+    max-width: 200px;
 }
 
 
@@ -741,6 +705,66 @@ footer {
 
 .footer-item ul a:hover{
     color: black;
+}
+
+@media (max-width: 600px) {
+    .category, footer {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .category:hover, footer:hover {
+        height: auto;
+    }
+
+    .category .category-item ul, footer .footer-item ul{
+        /* display: none; */
+        margin-left: 50px;
+        margin-bottom: 24px;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.5s ease, opacity 0.5s ease;
+
+        /* transition: color 2s ease 0.5s; */
+
+        /* = */
+
+        /* transition-property: color;
+        transition-duration: 2s;
+        transition-timing-function: ease;
+        transition-delay: 0.5s; */
+    }
+
+    .category .category-item ul.show, footer .footer-item ul.show{
+        max-height: 1000px;
+        opacity: 1;
+    }
+
+    .category-item h2,  .footer-item h2{
+        cursor: pointer;
+    }
+
+    hr {
+        margin-top: 0;
+        margin-bottom: 50px;
+    }
+
+    .hr-footer {
+        display: block;
+        margin: 0;
+        margin-bottom: 50px;
+        width: 100%;
+    }
+    
+    .footer-item {
+        max-width: 1000px;
+    }
+
+    footer .footer-item ul {
+        margin: 0;
+    }
+    
 }
 
 /*
