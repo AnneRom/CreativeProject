@@ -321,8 +321,65 @@ category.addEventListener('mouseenter', () => {
     // console.log(document.documentElement.scrollTop);
 });
 
-const mediaQuery = window.matchMedia('(max-width: 600px)'); //слідкує за станом медіазапиту, 
-//якщо ширина екрану менша або дорівнює 600px, то цей об'єкт матиме властивість matches -> true
+// const mediaQuery = window.matchMedia('(max-width: 600px)'); //слідкує за станом медіазапиту, 
+// //якщо ширина екрану менша або дорівнює 600px, то цей об'єкт матиме властивість matches -> true
+
+// const categoryHeader = document.querySelectorAll('.category-item h2');
+// const categoryUl = document.querySelectorAll('.category-item ul');
+
+// const footerHeader = document.querySelectorAll('.footer-item h2');
+// const footerUl = document.querySelectorAll('.footer-item ul');
+
+// let clickHandlers = [];//змінна зберігає всі додані обробники подій
+
+// function toggleList (index, list) {
+//     const ul = list[index];
+//     if (ul.classList.contains('show')){//contains - перевіряє чи міститься клас show в елемені ul
+//         ul.classList.remove('show');
+//     } else {
+//         ul.classList.add('show');
+//     }
+// }
+
+// function mediaQueryChange(event, headerSelect, listSelect) {
+//     //видаляємо попередні обробники подій 
+//     headerSelect.forEach((header, index) => {
+//         if (clickHandlers[index]) {
+//             header.removeEventListener('click', clickHandlers[index]);
+//         }
+//     });
+
+//     clickHandlers = [];
+
+//     if (event.matches) {//ширина екрану менша або дорівнює 600px
+        
+//         headerSelect.forEach((header, index) => {
+//             const handler = () => toggleList(index, listSelect);//handler - оброблювач
+//             clickHandlers[index] = handler;
+//             header.addEventListener('click', handler);
+//         });
+//         console.log(clickHandlers);
+
+//     } else {//ширина екрану більша 600px
+//        listSelect.forEach((ul) => {
+//             ul.classList.remove('show');
+//         }); 
+//     }
+
+// }
+
+// mediaQueryChange(mediaQuery, categoryHeader, categoryUl);//виклик функції одразу після завантаження сторінки
+
+// mediaQueryChange(mediaQuery, footerHeader, footerUl);//виклик функції одразу після завантаження сторінки
+
+
+// mediaQuery.addEventListener('change', (event) => {
+//     console.log("Change");
+//     mediaQueryChange(mediaQuery, categoryHeader, categoryUl);
+//     mediaQueryChange(mediaQuery, footerHeader, footerUl);
+// });
+
+const mediaQuery = window.matchMedia('(max-width: 600px)');
 
 const categoryHeader = document.querySelectorAll('.category-item h2');
 const categoryUl = document.querySelectorAll('.category-item ul');
@@ -330,55 +387,41 @@ const categoryUl = document.querySelectorAll('.category-item ul');
 const footerHeader = document.querySelectorAll('.footer-item h2');
 const footerUl = document.querySelectorAll('.footer-item ul');
 
-let clickHandlers = [];//змінна зберігає всі додані обробники подій
-
-function toggleList (index, list) {
+// Функція для переключення видимості списків
+function toggleList(index, list) {
     const ul = list[index];
-    if (ul.classList.contains('show')){//contains - перевіряє чи міститься клас show в елемені ul
-        ul.classList.remove('show');
-    } else {
-        ul.classList.add('show');
-    }
+    ul.classList.toggle('show');
 }
 
-function mediaQueryChange(event, headerSelect, listSelect) {
-    //видаляємо попередні обробники подій 
-    headerSelect.forEach((header, index) => {
-        if (clickHandlers[index]) {
-            header.removeEventListener('click', clickHandlers[index]);
-        }
+// Додаємо обробники подій до заголовків
+function addEventListeners() {
+    categoryHeader.forEach((header, index) => {
+        header.addEventListener('click', () => toggleList(index, categoryUl));
     });
-
-    clickHandlers = [];
-
-    if (event.matches) {//ширина екрану менша або дорівнює 600px
-        
-        headerSelect.forEach((header, index) => {
-            if (headerSelect == categoryHeader) {
-            const handler = () => toggleList(index, categoryUl);//handler - оброблювач
-            clickHandlers[index] = handler;
-            header.addEventListener('click', handler);
-            }
-            if (headerSelect == footerHeader) {
-                const handler = () => toggleList(index, footerUl);//handler - оброблювач
-                clickHandlers[index] = handler;
-                header.addEventListener('click', handler);
-            }
-        });
-        console.log(clickHandlers);
-
-    } else {//ширина екрану більша 600px
-       listSelect.forEach((ul) => {
-            ul.classList.remove('show');
-        }); 
-    }
-
+    
+    footerHeader.forEach((header, index) => {
+        header.addEventListener('click', () => toggleList(index, footerUl));
+    });
 }
 
-mediaQueryChange(mediaQuery, categoryHeader, categoryUl);//виклик функції одразу після завантаження сторінки
+// Оновлюємо видимість списків на основі медіа-запиту
+function updateVisibility() {
+    if (mediaQuery.matches) {
+        // Для маленьких екранів (менше або рівно 600px), списки повинні бути приховані за замовчуванням
+        categoryUl.forEach(ul => ul.classList.remove('show'));
+        footerUl.forEach(ul => ul.classList.remove('show'));
+    } else {
+        // Для великих екранів (більше 600px), показуємо списки
+        categoryUl.forEach(ul => ul.classList.add('show'));
+        footerUl.forEach(ul => ul.classList.add('show'));
+    }
+}
 
-mediaQueryChange(mediaQuery, footerHeader, footerUl);//виклик функції одразу після завантаження сторінки
+// Додаємо обробники подій при завантаженні сторінки
+addEventListeners();
 
+// Оновлюємо видимість списків при завантаженні сторінки
+updateVisibility();
 
-mediaQuery.addEventListener('change', mediaQueryChange);
-
+// Додаємо обробник події для зміни медіа-запиту
+mediaQuery.addEventListener('change', updateVisibility);
