@@ -160,10 +160,21 @@ header.content.hidden {
     transform: translateX(100%);
 }
 
+.icons a {
+    text-decoration: none;
+}
+
 .icons i {
-    background-color: white;
+    /* background-color: white;
     padding: 0.625rem;
-    border-radius: 50%;
+    border-radius: 50%; */
+    background-color: white;
+    border-radius: 50%; /* Робить div круглим */
+    display: flex; /* Встановлює flexbox для div */
+    justify-content: center; /* Горизонтальне вирівнювання */
+    align-items: center; /* Вертикальне вирівнювання */
+    width: 48px; /* Встановлює однакову ширину та висоту для div */
+    height: 48px;
 }
 
 .icons i:hover {
@@ -222,13 +233,22 @@ header.content.hidden {
     font-size: calc(38/16*1rem);
     padding-right: 50px;
     padding-top: 20px;
+    display: flex;
+    justify-content: flex-end;
 }
 .close-btn i {
     background-color: var(--darkGrayNike);
     color: black;
-    padding: calc(16/16*1rem) calc(20/16*1rem);
-    border-radius: 50%;
+    /* padding: calc(16/16*1rem) calc(20/16*1rem);
+    border-radius: 50%; */
     cursor: pointer;
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 48px; 
+    height: 48px;
+    margin: 0;
 }
 .sidebar-menu.active {
     right: 0;
@@ -242,7 +262,13 @@ header.content.hidden {
 }
 
 .no-scroll {
+    /* overflow: hidden; */
+    position: fixed; /* Фіксує позицію сторінки */
     overflow: hidden;
+    width: 100%;
+}
+.no-hover * {
+    pointer-events: none; /* Вимикає всі події миші, включаючи hover */
 }
 
 .catalog {

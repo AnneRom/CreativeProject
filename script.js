@@ -134,32 +134,60 @@ function hideCatalog(catalogDiv, withAnimation) {
     }
 }
 
+// let menuIcon = document.querySelector('.menu-icon');
+// let sideBar = document.querySelector('.sidebar-menu');
+// let closeBtn = document.querySelector('.close-btn i');
+// let contentElements = document.querySelectorAll('.content');
+// let body = document.body;
+// console.log(menuIcon);
+// console.log(sideBar);
+// console.log(closeBtn);
+// console.log(contentElements);
+
+// menuIcon.addEventListener('click', function(){
+//     sideBar.classList.add('active');
+//     body.style.overflow = 'hidden';//зупинка прокрутки
+//     contentElements.forEach(content => {
+//         content.classList.add('blur');
+//     });
+   
+// });
+
+// closeBtn.addEventListener('click', function(){
+//     sideBar.classList.remove('active');
+//     body.style.overflow = 'visible';//за замовчуванням прорутка є
+//     contentElements.forEach(content => {
+//         content.classList.remove('blur');
+//     });
+   
+// });
+
 let menuIcon = document.querySelector('.menu-icon');
 let sideBar = document.querySelector('.sidebar-menu');
 let closeBtn = document.querySelector('.close-btn i');
 let contentElements = document.querySelectorAll('.content');
 let body = document.body;
-console.log(menuIcon);
-console.log(sideBar);
-console.log(closeBtn);
-console.log(contentElements);
+let scrollPosition = 0;
 
-menuIcon.addEventListener('click', function(){
+menuIcon.addEventListener('click', function() {
+    scrollPosition = window.scrollY; // Збереження поточної позиції прокрутки
     sideBar.classList.add('active');
-    body.style.overflow = 'hidden';//зупинка прокрутки
+    body.style.top = `-${scrollPosition}px`; // Забезпечення правильного положення сторінки
+    body.classList.add('no-scroll'); // Зупинка прокрутки, без зміни позиції
     contentElements.forEach(content => {
         content.classList.add('blur');
+        content.classList.add('no-hover'); // Додавання класу для блокування hover ефектів
     });
-   
 });
 
-closeBtn.addEventListener('click', function(){
+closeBtn.addEventListener('click', function() {
     sideBar.classList.remove('active');
-    body.style.overflow = 'visible';//за замовчуванням прорутка є
+    body.classList.remove('no-scroll');
+    window.scrollTo(0, scrollPosition); // Повернення до попередньої позиції прокрутки
     contentElements.forEach(content => {
         content.classList.remove('blur');
+        content.classList.remove('no-hover'); // Видалення класу, щоб відновити hover ефекти
     });
-   
 });
 
 const galleryContainer = document.querySelector('.gallery-container');
