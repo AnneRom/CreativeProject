@@ -155,8 +155,12 @@ header.content.hidden {
 
 .search .btn-search i {
     background-color: white;
-    padding: 0.625rem;
-    border-radius: 50%;
+    width: 48px; /* Встановлює однакову ширину та висоту для div */
+    height: 48px;
+    border-radius: 50%; /* Робить div круглим */
+    display: flex; /* Встановлює flexbox для div */
+    justify-content: center; /* Горизонтальне вирівнювання */
+    align-items: center; /* Вертикальне вирівнювання */
     transform: translateX(100%);
 }
 
@@ -169,12 +173,12 @@ header.content.hidden {
     padding: 0.625rem;
     border-radius: 50%; */
     background-color: white;
+    width: 48px; /* Встановлює однакову ширину та висоту для div */
+    height: 48px;
     border-radius: 50%; /* Робить div круглим */
     display: flex; /* Встановлює flexbox для div */
     justify-content: center; /* Горизонтальне вирівнювання */
     align-items: center; /* Вертикальне вирівнювання */
-    width: 48px; /* Встановлює однакову ширину та висоту для div */
-    height: 48px;
 }
 
 .icons i:hover {
@@ -262,7 +266,6 @@ header.content.hidden {
 }
 
 .no-scroll {
-    /* overflow: hidden; */
     position: fixed; /* Фіксує позицію сторінки */
     overflow: hidden;
     width: 100%;
@@ -781,7 +784,8 @@ footer {
         overflow: hidden;
         max-height: 0;
         opacity: 0;
-        transition: max-height 0.5s ease, opacity 0.5s ease;
+        padding: 0 0 0 50px;
+        transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
 
         /* transition: color 2s ease 0.5s; */
 

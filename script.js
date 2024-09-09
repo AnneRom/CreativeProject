@@ -424,7 +424,10 @@ function toggleList(index, list) {
 // Додаємо обробники подій до заголовків
 function addEventListeners() {
     categoryHeader.forEach((header, index) => {
-        header.addEventListener('click', () => toggleList(index, categoryUl));
+        header.addEventListener('click', () => {
+            toggleList(index, categoryUl);
+            console.log("Click");
+        });
     });
     
     footerHeader.forEach((header, index) => {
